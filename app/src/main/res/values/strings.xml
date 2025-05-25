@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MapleBlock</string>
+    
+<!--    바텀 내비게이션-->
+    <string name="bottom_nav_home">홈</string>
+    <string name="bottom_nav_notice">공지</string>
+    <string name="bottom_nav_community">커뮤니티</string>
+    <string name="bottom_nav_white_paper">백서</string>
+    <string name="bottom_nav_setting">설정</string>
+</resources>
