@@ -22,7 +22,7 @@ navigationCompose = "2.9.0"
 koin = "4.0.4"
 
 # Coroutines
-kotlinxCoroutines = "1.10.1"
+kotlinxCoroutines = "1.10.2"
 
 # Network
 ktor = "3.1.2"
