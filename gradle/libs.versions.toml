@@ -37,6 +37,9 @@ coil = "3.1.0"
 # MVI
 orbit = "10.0.0"
 
+# Date
+threetenabp = "1.4.9"
+
 [libraries]
 # Kotlin
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
@@ -100,6 +103,9 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-ktor3 = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
 coil-svg = { group = "io.coil-kt.coil3", name = "coil-svg", version.ref = "coil" }
+
+# Date
+threetenabp = {group = "com.jakewharton.threetenabp", name = "threetenabp", version.ref = "threetenabp"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
