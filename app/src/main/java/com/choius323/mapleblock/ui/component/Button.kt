@@ -21,7 +21,7 @@ import com.choius323.mapleblock.ui.theme.TossBlue
 
 // 5.1 버튼(Button) 컴포넌트 [cite: 10]
 @Composable
-fun PrimaryMapleButton(
+fun MBPrimaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -52,7 +52,7 @@ fun PrimaryMapleButton(
 }
 
 @Composable
-fun SecondaryMapleButton(
+fun MBSecondaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -97,10 +97,10 @@ fun MapleButtonPreview() {
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            PrimaryMapleButton(text = "기본 버튼", onClick = { /* TODO */ })
-            PrimaryMapleButton(text = "비활성화 버튼", onClick = { /* TODO */ }, enabled = false)
-            SecondaryMapleButton(text = "보조 버튼", onClick = { /* TODO */ })
-            SecondaryMapleButton(text = "보조 비활성화 버튼", onClick = { /* TODO */ }, enabled = false)
+            MBPrimaryButton(text = "기본 버튼", onClick = { /* TODO */ })
+            MBPrimaryButton(text = "비활성화 버튼", onClick = { /* TODO */ }, enabled = false)
+            MBSecondaryButton(text = "보조 버튼", onClick = { /* TODO */ })
+            MBSecondaryButton(text = "보조 비활성화 버튼", onClick = { /* TODO */ }, enabled = false)
         }
     }
 }

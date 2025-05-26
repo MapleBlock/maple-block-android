@@ -18,7 +18,7 @@ import com.choius323.mapleblock.ui.theme.MBTheme
 
 // 5.3 카드(Card) 컴포넌트 [cite: 16]
 @Composable
-fun MapleCard(
+fun MBCard(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
@@ -45,7 +45,7 @@ fun MapleCard(
 @Composable
 private fun MapleCardPreview() {
     MBTheme {
-        MapleCard(modifier = Modifier
+        MBCard(modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()) {
             Column(modifier = Modifier.padding(16.dp)) {

@@ -20,7 +20,7 @@ import com.choius323.mapleblock.ui.theme.MBTheme
 
 // 5.2 입력 필드(Input) 컴포넌트 [cite: 14]
 @Composable
-fun MapleTextField(
+fun MBTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -58,7 +58,7 @@ fun MapleTextField(
 private fun MapleTextFieldPreview() {
     var textValue by remember { mutableStateOf("") }
     MBTheme {
-        MapleTextField(
+        MBTextField(
             value = textValue,
             onValueChange = { textValue = it },
             placeholder = { Text("입력해주세요") },
