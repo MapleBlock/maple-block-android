@@ -177,7 +177,7 @@ fun BottomNavController(
                 WhitePaperScreen()
             }
             composable<BottomNavItem.Setting> { backStackEntry ->
-                SettingScreen()
+                SettingNavController()
             }
         }
     }

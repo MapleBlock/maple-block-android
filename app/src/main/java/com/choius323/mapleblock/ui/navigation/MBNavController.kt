@@ -18,6 +18,7 @@ inline fun <reified T : MBNavController> rememberMBNavController(
     when (T::class) {
         BottomNavController::class -> BottomNavController(navController) as T
         MainNavController::class -> MainNavController(navController) as T
+        SettingNavController::class -> SettingNavController(navController) as T
         else -> throw IllegalArgumentException("Unsupported MBNavController type: ${T::class}")
     }
 }

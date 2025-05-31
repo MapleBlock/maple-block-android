@@ -2,6 +2,7 @@ package com.choius323.mapleblock.ui.screen.setting
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,11 +13,15 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SettingScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    goProfileScreen: () -> Unit,
 ) {
     var num by rememberSaveable { mutableIntStateOf(0) }
     Column {
         Text("num: $num", modifier = modifier.clickable { num++ })
         Text("Setting Screen")
+        Button(onClick = goProfileScreen) {
+            Text("프로필 화면 이동")
+        }
     }
 }

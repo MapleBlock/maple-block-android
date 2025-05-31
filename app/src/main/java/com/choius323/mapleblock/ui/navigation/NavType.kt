@@ -63,3 +63,11 @@ sealed interface MainNavItem : NavItem {
     @Serializable
     data class NoticeArticle(val id: Int) : MainNavItem
 }
+
+sealed interface SettingNavItem : NavItem {
+    @Serializable
+    data object SettingMain : SettingNavItem
+
+    @Serializable
+    data object Profile : SettingNavItem
+}
