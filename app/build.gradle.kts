@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.material.icons.extended)
 
     // Compose Navigation
     implementation(libs.androidx.navigation.compose)
