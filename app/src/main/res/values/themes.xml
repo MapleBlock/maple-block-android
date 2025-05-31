@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MapleBlock" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MapleBlock" parent="android:Theme.Material.Light.NoActionBar" >
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!-- 스플래시 스크린 설정 -->
+    <style name="Theme.CustomSplashScreen" parent="Theme.MapleBlock">
+        <item name="android:windowBackground">@color/teal_700</item>
+<!--        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@color/purple_700</item>-->
+    </style>
 </resources>
