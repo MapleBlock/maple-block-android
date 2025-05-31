@@ -3,13 +3,10 @@ package com.choius323.mapleblock.ui.navigation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.toRoute
 import com.choius323.mapleblock.ui.screen.notice.NoticeArticleScreen
 
@@ -21,7 +18,6 @@ fun MainNavController(
     modifier: Modifier = Modifier,
     mainNavController: MainNavController = rememberMBNavController<MainNavController>()
 ) {
-    LocalContext.current
     val navController = mainNavController.navController
 
     NavHost(
