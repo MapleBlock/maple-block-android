@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 inline fun <reified T : MBNavController> rememberMBNavController(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ): T = remember(navController) {
     when (T::class) {
         BottomNavController::class -> BottomNavController(navController) as T
@@ -24,25 +24,9 @@ inline fun <reified T : MBNavController> rememberMBNavController(
 }
 
 @Stable
-abstract class MBNavController(val navController: NavHostController) {
+abstract class MBNavController  (val navController: NavHostController) {
     fun upPress() {
         navController.navigateUp()
-    }
-
-    fun <T : Any> navigateToBottomBarRoute(route: T) {
-        if (route != navController.currentDestination?.route) {
-            navController.navigate(route) {
-                launchSingleTop = true
-                restoreState = true
-                /*
-                 Pop up backstack to the first destination and save state. This makes going back
-                 to the start destination when pressing back in any other bottom tab.
-                 */
-                popUpTo(findStartDestination(navController.graph).id) {
-                    saveState = true
-                }
-            }
-        }
     }
 
     fun navigate(from: NavBackStackEntry? = null, to: NavHostController.() -> Unit) {
@@ -51,7 +35,7 @@ abstract class MBNavController(val navController: NavHostController) {
         }
     }
 
-    fun <T : Any> navigate(
+    fun <T: NavItem> navigate(
         to: T, from: NavBackStackEntry? = null, navOptions: NavOptions? = null
     ) {
         if (from == null || from.lifecycleIsResumed()) {
@@ -82,6 +66,6 @@ private val NavGraph.startDestination: NavDestination?
  *
  * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:navigation/navigation-ui/src/main/java/androidx/navigation/ui/NavigationUI.kt
  */
-private tailrec fun findStartDestination(graph: NavDestination): NavDestination {
+tailrec fun findStartDestination(graph: NavDestination): NavDestination {
     return if (graph is NavGraph) findStartDestination(graph.startDestination!!) else graph
 }

@@ -18,7 +18,7 @@ class SettingNavController(controller: NavHostController) : MBNavController(cont
 @Composable
 fun SettingNavController(
     modifier: Modifier = Modifier,
-    settingNavController: SettingNavController = rememberMBNavController<SettingNavController>(),
+    settingNavController: SettingNavController = rememberMBNavController(),
     snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
     val navController = settingNavController.navController

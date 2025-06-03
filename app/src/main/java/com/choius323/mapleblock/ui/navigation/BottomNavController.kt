@@ -34,14 +34,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navOptions
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.svg.SvgDecoder
@@ -50,7 +49,6 @@ import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeScreen
-import com.choius323.mapleblock.ui.screen.setting.SettingScreen
 import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
 import com.choius323.mapleblock.ui.theme.Gray30
 import kotlinx.coroutines.launch
@@ -58,34 +56,38 @@ import kotlinx.coroutines.launch
 @Stable
 class BottomNavController(controller: NavHostController) : MBNavController(controller) {
 
-    fun <T : BottomNavItem> navigate(
-        to: T,
-        from: NavBackStackEntry? = null,
-        navOptions: NavOptions? = null
-    ) {
-        super.navigate(to, from = from, navOptions = navOptions)
-    }
-
-    fun navigateToBottomTab(item: BottomNavItem) {
-        val currentDestination = navController.currentDestination
-        val isCurrentTab = currentDestination?.hierarchy?.any { it.hasRoute(item::class) } == true
-
-        if (isCurrentTab) {
-            // 같은 탭을 클릭한 경우 - 루트로 이동하여 새로고침
-            navController.navigate(item) {
-                popUpTo(item) {
-                    inclusive = true
-                }
-                launchSingleTop = true
-            }
-        } else {
-            // 다른 탭으로 이동하는 경우 - 상태 보존
-            navigateToBottomBarRoute(item)
-        }
-    }
-
     fun navigateToHome() {
         navigateToBottomBarRoute(BottomNavItem.Home)
+    }
+
+    fun navigateToBottomBarRoute(route: BottomNavItem) {
+        if (route.fullName != navController.currentDestination?.route) {
+            // 다른 탭일 때
+            navigate(
+                to = route, from = navController.currentBackStackEntry, navOptions = navOptions {
+                    launchSingleTop = true
+                    restoreState = true
+                    popUpTo(findStartDestination(navController.graph).id) {
+                        saveState = true
+                    }
+                })
+        } else {
+            val currentRoute = navController.currentBackStackEntry?.destination?.route
+            val isAtRootScreen = currentRoute != null && BottomNavItem.list.any { item ->
+                currentRoute == item.fullName
+            }
+            if (isAtRootScreen) {
+                // 같은 탭의 최상위 화면일 때
+                navigate(route, navOptions = navOptions {
+                    popUpTo(route) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                })
+            } else {
+                upPress()
+            }
+        }
     }
 }
 
@@ -96,23 +98,70 @@ fun BottomNavController(
     snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
     goToNoticeArticle: (Int) -> Unit = {},
 ) {
-    val context = LocalContext.current
     val navController = bottomNavController.navController
-    val backStackEntry by navController.currentBackStackEntryAsState()
+    val coroutineScope = rememberCoroutineScope()
 
-    // 뒤로가기 처리를 위한 상태
+    BottomBackHandler(bottomNavController)
+
+    Scaffold(modifier = modifier.background(MaterialTheme.colorScheme.primary), bottomBar = {
+        MBBottomBar(bottomNavController)
+    }, snackbarHost = {
+        SnackbarHost(snackBarHostState) { snackData ->
+            MBSnackBar(snackData.visuals.message)
+        }
+    }) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = BottomNavItem.Home,
+            modifier = modifier.padding(innerPadding)
+        ) {
+            composable<BottomNavItem.Home> { backStackEntry ->
+                HomeScreen(
+                    showSnackBar = {
+                        coroutineScope.launch {
+                            snackBarHostState.showSnackbar(it)
+                        }
+                    }, goToNoticeArticle = goToNoticeArticle
+                )
+            }
+            composable<BottomNavItem.Notice> { backStackEntry ->
+                NoticeScreen()
+            }
+            composable<BottomNavItem.Community> { backStackEntry ->
+                CommunityScreen()
+            }
+            composable<BottomNavItem.WhitePaper> { backStackEntry ->
+                WhitePaperScreen()
+            }
+            composable<BottomNavItem.Setting> { backStackEntry ->
+                SettingNavController()
+            }
+        }
+    }
+}
+
+@Composable
+fun BottomBackHandler(bottomNavController: BottomNavController) {
+    val backStackEntry by bottomNavController.navController.currentBackStackEntryAsState()
+    val context = LocalContext.current
+
     var backPressedTime by remember { mutableLongStateOf(0L) }
 
     // 현재 화면이 루트 화면인지 확인
-    val isAtRootScreen = remember(backStackEntry?.destination) {
-        backStackEntry?.destination?.hierarchy?.any { destination ->
-            BottomNavItem.list.any { it::class.qualifiedName == destination.route }
-        } == true
+    val isAtRootScreen by remember {
+        derivedStateOf {
+            val currentRoute = backStackEntry?.destination?.route
+            currentRoute != null && BottomNavItem.list.any { item ->
+                currentRoute == item.fullName
+            }
+        }
     }
 
     // 현재 화면이 Home인지 확인
-    val isAtHome = remember(backStackEntry?.destination) {
-        backStackEntry?.destination?.hasRoute(BottomNavItem.Home::class) == true
+    val isAtHome by remember {
+        derivedStateOf {
+            backStackEntry?.destination?.hasRoute(BottomNavItem.Home::class) == true
+        }
     }
 
     // 뒤로가기 처리
@@ -130,55 +179,12 @@ fun BottomNavController(
                     Toast.makeText(context, "뒤로 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                // 다른 루트 화면에서 뒤로가기 - Home으로 이동
+                // 다른 루트 화면에서 뒤로가기
                 bottomNavController.navigateToHome()
             }
         } else {
             // 루트가 아닌 화면에서는 일반 뒤로가기
-            navController.navigateUp()
-        }
-    }
-
-    val coroutineScope = rememberCoroutineScope()
-
-    Scaffold(
-        modifier = modifier.background(MaterialTheme.colorScheme.primary),
-        bottomBar = {
-            MBBottomBar(bottomNavController)
-        },
-        snackbarHost = {
-            SnackbarHost(snackBarHostState) { snackData ->
-                MBSnackBar(snackData.visuals.message)
-            }
-        }
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = BottomNavItem.Home,
-            modifier = modifier.padding(innerPadding)
-        ) {
-            composable<BottomNavItem.Home> { backStackEntry ->
-                HomeScreen(
-                    showSnackBar = {
-                        coroutineScope.launch {
-                            snackBarHostState.showSnackbar(it)
-                        }
-                    },
-                    goToNoticeArticle = goToNoticeArticle
-                )
-            }
-            composable<BottomNavItem.Notice> { backStackEntry ->
-                NoticeScreen()
-            }
-            composable<BottomNavItem.Community> { backStackEntry ->
-                CommunityScreen()
-            }
-            composable<BottomNavItem.WhitePaper> { backStackEntry ->
-                WhitePaperScreen()
-            }
-            composable<BottomNavItem.Setting> { backStackEntry ->
-                SettingNavController()
-            }
+            bottomNavController.upPress()
         }
     }
 }
@@ -209,15 +215,12 @@ fun MBBottomBar(
                     .weight(1f)
                     .fillMaxHeight()
                     .clickable {
-                        bottomNavController.navigateToBottomTab(item)
-                    },
-                horizontalAlignment = Alignment.CenterHorizontally
+                        bottomNavController.navigateToBottomBarRoute(item)
+                    }, horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(item.iconRes)
-                        .decoderFactory(SvgDecoder.Factory())
-                        .build(),
+                    model = ImageRequest.Builder(LocalContext.current).data(item.iconRes)
+                        .decoderFactory(SvgDecoder.Factory()).build(),
                     contentDescription = item.name,
                     modifier = Modifier.size(24.dp),
                     colorFilter = ColorFilter.tint(color),

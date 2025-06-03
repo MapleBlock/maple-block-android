@@ -16,7 +16,7 @@ class MainNavController(controller: NavHostController) : MBNavController(control
 @Composable
 fun MainNavController(
     modifier: Modifier = Modifier,
-    mainNavController: MainNavController = rememberMBNavController<MainNavController>()
+    mainNavController: MainNavController = rememberMBNavController(),
 ) {
     val navController = mainNavController.navController
 
