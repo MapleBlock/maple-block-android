@@ -40,6 +40,9 @@ orbit = "10.0.0"
 # Date
 threetenabp = "1.4.9"
 
+# Accompanist
+accompanist = "0.37.3"
+
 [libraries]
 # Kotlin
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
@@ -107,6 +110,9 @@ coil-svg = { group = "io.coil-kt.coil3", name = "coil-svg", version.ref = "coil"
 
 # Date
 threetenabp = {group = "com.jakewharton.threetenabp", name = "threetenabp", version.ref = "threetenabp"}
+
+# Permission
+accompanist-permissions = {group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

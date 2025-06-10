@@ -96,6 +96,9 @@ dependencies {
     // Date
     implementation(libs.threetenabp)
 
+    // Permission
+    implementation(libs.accompanist.permissions)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
