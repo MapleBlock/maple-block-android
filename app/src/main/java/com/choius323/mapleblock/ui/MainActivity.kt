@@ -16,8 +16,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
-        val intent = Intent(this, SplashActivity::class.java)
-        (this as? Activity)?.startActivity(intent)
+        if(savedInstanceState == null) {
+            val intent = Intent(this, SplashActivity::class.java)
+            (this as? Activity)?.startActivity(intent)
+        }
         setContent {
             MBTheme(false) {
                 MainNavController(
