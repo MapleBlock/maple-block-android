@@ -1,10 +1,24 @@
 <resources>
     <string name="app_name">MapleBlock</string>
     
-<!--    바텀 내비게이션-->
+    <!--  바텀 내비게이션  -->
     <string name="bottom_nav_home">홈</string>
     <string name="bottom_nav_notice">공지</string>
     <string name="bottom_nav_community">커뮤니티</string>
     <string name="bottom_nav_white_paper">백서</string>
     <string name="bottom_nav_setting">설정</string>
+
+    <!--  권한  -->
+    <string name="permission_dialog_title_media">[선택] 이미지 및 비디오 가져오기</string>
+    <string name="permission_dialog_description_media">이미지, 비디오를 가져오기 위해서는 해당 권한이 필요합니다.</string>
+    <string name="permission_dialog_description_media_permanently_declined"><![CDATA[[설정] -> [권한] -> 에서 권한을 설정해주세요.]]></string>
+    <string name="permission_dialog_title_external_storage">[선택] 외부 저장소 읽기 권한</string>
+    <string name="permission_dialog_description_external_storage">이미지를 읽기 위해 외부 저장소 읽기 권한이 필요합니다.</string>
+    <string name="permission_dialog_description_external_storage_permanently_declined"><![CDATA[[설정] -> [권한] -> 에서 권한을 허용해주세요.]]></string>
+    <string name="permission_dialog_title_visual_selected">[선택] 이미지 가져오기</string>
+    <string name="permission_dialog_description_visual_selected">이미지를 가져오기 위해서는 해당 권한이 필요합니다.</string>
+    <string name="permission_dialog_description_visual_selected_permanently_declined"><![CDATA[[설정] -> [권한] -> 에서 권한을 설정해주세요.]]></string>
+    <string name="permission_confirm">허가</string>
+    <string name="permission_cancel">취소</string>
+
 </resources>
