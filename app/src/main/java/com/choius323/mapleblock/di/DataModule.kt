@@ -1,6 +1,10 @@
 package com.choius323.mapleblock.di
 
 import android.util.Log
+import com.choius323.mapleblock.data.community.PostDataSourceRemote
+import com.choius323.mapleblock.data.community.PostDataSourceRemoteImpl
+import com.choius323.mapleblock.data.community.PostRepository
+import com.choius323.mapleblock.data.community.PostRepositoryImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -29,20 +33,20 @@ object PrettyLogger : io.ktor.client.plugins.logging.Logger {
 
 // Pretty Print JSON Function
 fun prettyJson(json: String): String {
-    return try {
+    return runCatching {
         when {
             json.startsWith("{") -> JSONObject(json).toString(4) // Format JSON Object
             json.startsWith("[") -> JSONArray(json).toString(4) // Format JSON Array
             else -> json
         }
-    } catch (e: Exception) {
+    }.getOrDefault(
         json // Return as is if formatting fails
-    }
+    )
 }
 
 object KtorClient {
     val client = HttpClient(OkHttp) {
-        install(Logging){
+        install(Logging) {
             logger = PrettyLogger
             level = LogLevel.BODY
         }
@@ -59,6 +63,6 @@ object KtorClient {
 val dataModule = module {
     single<CoroutineDispatcher>(named(IoDispatcher)) { Dispatchers.IO }
     single<HttpClient> { KtorClient.client }
-//    singleOf(::PokeService)
-//    single<PokeRemoteDataSource> { PokeRemoteDataSourceImpl(get(named(IoDispatcher)), get()) }
+    single<PostRepository> { PostRepositoryImpl(get()) }
+    single<PostDataSourceRemote> { PostDataSourceRemoteImpl(get(named(IoDispatcher))) }
 }
