@@ -46,7 +46,6 @@ import coil3.request.ImageRequest
 import coil3.svg.SvgDecoder
 import com.choius323.mapleblock.ui.component.MBSnackBar
 import com.choius323.mapleblock.ui.component.MBText
-import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeScreen
 import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
@@ -121,14 +120,15 @@ fun BottomNavController(
                         coroutineScope.launch {
                             snackBarHostState.showSnackbar(it)
                         }
-                    }, goToNoticeArticle = goToNoticeArticle
+                    },
+                    goToNoticeArticle = goToNoticeArticle
                 )
             }
             composable<BottomNavItem.Notice> { backStackEntry ->
                 NoticeScreen()
             }
             composable<BottomNavItem.Community> { backStackEntry ->
-                CommunityScreen()
+                CommunityNavController()
             }
             composable<BottomNavItem.WhitePaper> { backStackEntry ->
                 WhitePaperScreen()

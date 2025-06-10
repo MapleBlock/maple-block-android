@@ -71,3 +71,11 @@ sealed interface SettingNavItem : NavItem {
     @Serializable
     data object Profile : SettingNavItem
 }
+
+sealed interface CommunityNavItem : NavItem {
+    @Serializable
+    data object CommunityMain : CommunityNavItem
+
+    @Serializable
+    data object WritePost : CommunityNavItem
+}
