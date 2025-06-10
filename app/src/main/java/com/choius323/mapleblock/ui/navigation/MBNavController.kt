@@ -15,16 +15,11 @@ import androidx.navigation.compose.rememberNavController
 inline fun <reified T : MBNavController> rememberMBNavController(
     navController: NavHostController = rememberNavController(),
 ): T = remember(navController) {
-    when (T::class) {
-        BottomNavController::class -> BottomNavController(navController) as T
-        MainNavController::class -> MainNavController(navController) as T
-        SettingNavController::class -> SettingNavController(navController) as T
-        else -> throw IllegalArgumentException("Unsupported MBNavController type: ${T::class}")
-    }
+    T::class.constructors.first().call(navController)
 }
 
 @Stable
-abstract class MBNavController  (val navController: NavHostController) {
+abstract class MBNavController(val navController: NavHostController) {
     fun upPress() {
         navController.navigateUp()
     }
