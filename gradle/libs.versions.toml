@@ -2,11 +2,11 @@
 agp = "8.10.1"
 
 # Kotlin
-kotlin = "2.1.10"
+kotlin = "2.1.21"
 
 # Androidx
 coreKtx = "1.16.0"
-lifecycleRuntimeKtx = "2.9.0"
+lifecycleRuntimeKtx = "2.9.1"
 
 # Testing
 junit = "4.13.2"
@@ -14,25 +14,25 @@ androidJunitVersion = "1.2.1"
 espressoCore = "3.6.1"
 
 # Compose
-composeBom = "2025.05.01"
+composeBom = "2025.06.01"
 activityCompose = "1.10.1"
 navigationCompose = "2.9.0"
 
 # Koin
-koin = "4.0.4"
+koin = "4.1.0"
 
 # Coroutines
 kotlinxCoroutines = "1.10.2"
 
 # Network
 ktor = "3.1.2"
-logbackClassic = "1.4.14"
+logbackClassic = "1.5.18"
 
 # Kotlin Serialization
-kotlinxSerializationJson = "1.8.0"
+kotlinxSerializationJson = "1.8.1"
 
 # Image
-coil = "3.1.0"
+coil = "3.2.0"
 
 # MVI
 orbit = "10.0.0"
