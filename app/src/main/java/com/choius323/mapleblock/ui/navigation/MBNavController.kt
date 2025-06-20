@@ -9,7 +9,9 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 
 @Composable
 inline fun <reified T : MBNavController> rememberMBNavController(
@@ -24,17 +26,64 @@ abstract class MBNavController(val navController: NavHostController) {
         navController.navigateUp()
     }
 
-    fun navigate(from: NavBackStackEntry? = null, to: NavHostController.() -> Unit) {
-        if (from == null || from.lifecycleIsResumed()) {
-            navController.to()
-        }
+    fun <T : NavItem> navigate(
+        to: T, from: NavBackStackEntry? = null, navBuilder: NavOptionsBuilder.() -> Unit = {},
+    ) {
+        navigate(
+            to = to,
+            from = from ?: navController.currentBackStackEntry,
+            navOptions = navOptions(navBuilder)
+        )
     }
 
-    fun <T: NavItem> navigate(
-        to: T, from: NavBackStackEntry? = null, navOptions: NavOptions? = null
+    fun <T : NavItem> navigate(
+        to: T, from: NavBackStackEntry?, navOptions: NavOptions? = null,
     ) {
         if (from == null || from.lifecycleIsResumed()) {
             navController.navigate(to, navOptions)
+        }
+    }
+
+    fun <T : NavItem> navigateNow(
+        to: T, navBuilder: NavOptionsBuilder.() -> Unit = {},
+    ) {
+        navController.navigate(
+            to,
+            navOptions = navOptions(navBuilder)
+        )
+    }
+
+    fun navigateToHome() {
+        navigateToBottomBarRoute(NavItem.BottomNavItem.Home)
+    }
+
+    fun navigateToBottomBarRoute(route: NavItem) {
+        if (route.fullName != navController.currentDestination?.route) {
+            // 다른 탭일 때
+            navigate(
+                to = route, from = navController.currentBackStackEntry, navOptions = navOptions {
+                    launchSingleTop = true
+                    restoreState = true
+                    popUpTo(findStartDestination(navController.graph).id) {
+                        saveState = true
+                    }
+                })
+        } else {
+            val currentRoute = navController.currentBackStackEntry?.destination?.route
+            val isAtRootScreen = currentRoute != null && NavItem.BottomNavItem.list.any { item ->
+                currentRoute == item.fullName
+            }
+            if (isAtRootScreen) {
+                // 같은 탭의 최상위 화면일 때
+                navigate(route) {
+                    popUpTo(route) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            } else {
+                upPress()
+            }
         }
     }
 

@@ -53,42 +53,7 @@ import com.choius323.mapleblock.ui.theme.Gray30
 import kotlinx.coroutines.launch
 
 @Stable
-class BottomNavController(controller: NavHostController) : MBNavController(controller) {
-
-    fun navigateToHome() {
-        navigateToBottomBarRoute(NavItem.BottomNavItem.Home)
-    }
-
-    fun navigateToBottomBarRoute(route: NavItem) {
-        if (route.fullName != navController.currentDestination?.route) {
-            // 다른 탭일 때
-            navigate(
-                to = route, from = navController.currentBackStackEntry, navOptions = navOptions {
-                    launchSingleTop = true
-                    restoreState = true
-                    popUpTo(findStartDestination(navController.graph).id) {
-                        saveState = true
-                    }
-                })
-        } else {
-            val currentRoute = navController.currentBackStackEntry?.destination?.route
-            val isAtRootScreen = currentRoute != null && NavItem.BottomNavItem.list.any { item ->
-                currentRoute == item.fullName
-            }
-            if (isAtRootScreen) {
-                // 같은 탭의 최상위 화면일 때
-                navigate(route, navOptions = navOptions {
-                    popUpTo(route) {
-                        inclusive = true
-                    }
-                    launchSingleTop = true
-                })
-            } else {
-                upPress()
-            }
-        }
-    }
-}
+class BottomNavController(controller: NavHostController) : MBNavController(controller)
 
 @Composable
 fun BottomNavController(
