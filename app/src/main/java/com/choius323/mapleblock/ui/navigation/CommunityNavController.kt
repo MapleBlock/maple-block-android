@@ -20,14 +20,14 @@ fun CommunityNavController(
 ) {
     NavHost(
         navController = communityNavController.navController,
-        startDestination = CommunityNavItem.CommunityMain,
+        startDestination = NavItem.CommunityMain,
     ) {
-        composable<CommunityNavItem.CommunityMain> {
+        composable<NavItem.CommunityMain> {
             CommunityScreen(modifier.fillMaxSize()) {
-                communityNavController.navigate(CommunityNavItem.WritePost)
+                communityNavController.navigate(NavItem.WritePost)
             }
         }
-        composable<CommunityNavItem.WritePost> {
+        composable<NavItem.WritePost> {
             WritePostScreen(modifier.fillMaxSize()) {
                 communityNavController.upPress()
             }

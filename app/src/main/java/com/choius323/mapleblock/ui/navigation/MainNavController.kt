@@ -23,15 +23,15 @@ fun MainNavController(
     NavHost(
         navController = navController,
         modifier = modifier,
-        startDestination = MainNavItem.BottomNav,
+        startDestination = NavItem.BottomNav,
     ) {
-        composable<MainNavItem.BottomNav> { backStackEntry ->
+        composable<NavItem.BottomNav> { backStackEntry ->
             BottomNavController(Modifier.fillMaxSize(), goToNoticeArticle = { id ->
-                navController.navigate(MainNavItem.NoticeArticle(id))
+                navController.navigate(NavItem.NoticeArticle(id))
             })
         }
-        composable<MainNavItem.NoticeArticle> { backStackEntry ->
-            val notice = backStackEntry.savedStateHandle.toRoute<MainNavItem.NoticeArticle>()
+        composable<NavItem.NoticeArticle> { backStackEntry ->
+            val notice = backStackEntry.savedStateHandle.toRoute<NavItem.NoticeArticle>()
             println("notice: $notice")
             NoticeArticleScreen(Modifier.fillMaxSize())
         }

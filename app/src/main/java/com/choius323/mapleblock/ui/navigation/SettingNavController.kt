@@ -25,14 +25,14 @@ fun SettingNavController(
     NavHost(
         navController = navController,
         modifier = modifier,
-        startDestination = SettingNavItem.SettingMain
+        startDestination = NavItem.SettingMain
     ) {
-        composable<SettingNavItem.SettingMain> {
+        composable<NavItem.SettingMain> {
             SettingScreen(goProfileScreen = {
-                navController.navigate(SettingNavItem.Profile)
+                navController.navigate(NavItem.Profile)
             })
         }
-        composable<SettingNavItem.Profile> {
+        composable<NavItem.Profile> {
             ProfileScreen()
         }
     }

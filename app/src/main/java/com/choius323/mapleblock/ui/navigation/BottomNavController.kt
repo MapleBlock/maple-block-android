@@ -56,10 +56,10 @@ import kotlinx.coroutines.launch
 class BottomNavController(controller: NavHostController) : MBNavController(controller) {
 
     fun navigateToHome() {
-        navigateToBottomBarRoute(BottomNavItem.Home)
+        navigateToBottomBarRoute(NavItem.BottomNavItem.Home)
     }
 
-    fun navigateToBottomBarRoute(route: BottomNavItem) {
+    fun navigateToBottomBarRoute(route: NavItem) {
         if (route.fullName != navController.currentDestination?.route) {
             // 다른 탭일 때
             navigate(
@@ -72,7 +72,7 @@ class BottomNavController(controller: NavHostController) : MBNavController(contr
                 })
         } else {
             val currentRoute = navController.currentBackStackEntry?.destination?.route
-            val isAtRootScreen = currentRoute != null && BottomNavItem.list.any { item ->
+            val isAtRootScreen = currentRoute != null && NavItem.BottomNavItem.list.any { item ->
                 currentRoute == item.fullName
             }
             if (isAtRootScreen) {
@@ -111,10 +111,10 @@ fun BottomNavController(
     }) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = BottomNavItem.Home,
+            startDestination = NavItem.BottomNavItem.Home,
             modifier = modifier.padding(innerPadding)
         ) {
-            composable<BottomNavItem.Home> { backStackEntry ->
+            composable<NavItem.BottomNavItem.Home> { backStackEntry ->
                 HomeScreen(
                     showSnackBar = {
                         coroutineScope.launch {
@@ -124,16 +124,16 @@ fun BottomNavController(
                     goToNoticeArticle = goToNoticeArticle
                 )
             }
-            composable<BottomNavItem.Notice> { backStackEntry ->
+            composable<NavItem.BottomNavItem.Notice> { backStackEntry ->
                 NoticeScreen()
             }
-            composable<BottomNavItem.Community> { backStackEntry ->
+            composable<NavItem.BottomNavItem.Community> { backStackEntry ->
                 CommunityNavController()
             }
-            composable<BottomNavItem.WhitePaper> { backStackEntry ->
+            composable<NavItem.BottomNavItem.WhitePaper> { backStackEntry ->
                 WhitePaperScreen()
             }
-            composable<BottomNavItem.Setting> { backStackEntry ->
+            composable<NavItem.BottomNavItem.Setting> { backStackEntry ->
                 SettingNavController()
             }
         }
@@ -151,7 +151,7 @@ fun BottomBackHandler(bottomNavController: BottomNavController) {
     val isAtRootScreen by remember {
         derivedStateOf {
             val currentRoute = backStackEntry?.destination?.route
-            currentRoute != null && BottomNavItem.list.any { item ->
+            currentRoute != null && NavItem.BottomNavItem.list.any { item ->
                 currentRoute == item.fullName
             }
         }
@@ -160,7 +160,7 @@ fun BottomBackHandler(bottomNavController: BottomNavController) {
     // 현재 화면이 Home인지 확인
     val isAtHome by remember {
         derivedStateOf {
-            backStackEntry?.destination?.hasRoute(BottomNavItem.Home::class) == true
+            backStackEntry?.destination?.hasRoute(NavItem.BottomNavItem.Home::class) == true
         }
     }
 
@@ -203,7 +203,7 @@ fun MBBottomBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        BottomNavItem.list.forEach { item ->
+        NavItem.BottomNavItem.list.forEach { item ->
             val isSelected = remember(backStackEntry?.destination) {
                 backStackEntry?.destination?.hierarchy?.any { it.hasRoute(item::class) } == true
             }
