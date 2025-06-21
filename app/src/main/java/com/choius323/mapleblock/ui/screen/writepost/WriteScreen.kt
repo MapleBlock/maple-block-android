@@ -1,11 +1,15 @@
 package com.choius323.mapleblock.ui.screen.writepost
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -13,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.MBTextField
+import com.choius323.mapleblock.ui.component.ProvideAppBar
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -35,6 +40,16 @@ fun WritePostScreen(
             ).show()
         }
     }
+    ProvideAppBar(
+        showAppBar = true,
+        navigationIcon = {
+            Icon(
+                Icons.AutoMirrored.Default.ArrowBack,
+                contentDescription = "",
+                Modifier.clickable(onClick = onSuccessPost)
+            )
+        }
+    )
     WritePostScreen(
         modifier = modifier,
         uiState = uiState,

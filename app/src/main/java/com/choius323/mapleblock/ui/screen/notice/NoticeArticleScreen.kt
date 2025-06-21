@@ -31,7 +31,10 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun NoticeArticleScreen(modifier: Modifier = Modifier) {
+fun NoticeArticleScreen(
+    noticeId: Int,
+    modifier: Modifier = Modifier,
+) {
     var imageUris = remember { mutableStateListOf<Uri>() }
     var showPermissionDialog = remember { mutableStateOf(false) }
     val permissionState = rememberMultiplePermissionsState(permissions = readImagePermissions)

@@ -50,7 +50,8 @@ fun MBTopAppBar(
             viewModel.navigationIcon,
             viewModel.title,
             viewModel.actions,
-            modifier
+            viewModel.showAppBar,
+            modifier,
         )
     }
 }
@@ -60,8 +61,10 @@ private fun MBTopAppBar(
     navigationIcon: @Composable () -> Unit,
     title: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit,
+    showAppBar: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    if (showAppBar.not()) return
     Box(
         modifier
             .padding(vertical = 18.dp, horizontal = 22.dp)
@@ -87,7 +90,7 @@ private fun MBTopAppBar(
 @Preview(widthDp = 300, showBackground = true)
 @Preview(widthDp = 150, showBackground = true)
 @Composable
-private fun SaiTopAppBarPreview() {
+private fun MBTopAppBarPreview() {
     MBTheme {
         Surface {
             MBTopAppBar(
@@ -103,6 +106,7 @@ private fun SaiTopAppBarPreview() {
                     Icon(Icons.AutoMirrored.Default.List, null)
                     Icon(Icons.Default.AddAlert, null)
                 },
+                showAppBar = true,
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -111,7 +115,7 @@ private fun SaiTopAppBarPreview() {
 
 @Preview(widthDp = 300, showBackground = true)
 @Composable
-private fun SaiTopAppBarPreview2() {
+private fun MBTopAppBarPreview2() {
     MBTheme {
         Surface {
             MBTopAppBar(
@@ -122,6 +126,7 @@ private fun SaiTopAppBarPreview2() {
                     MBText("Title Preview 2", maxLines = 1)
                 },
                 actions = {},
+                showAppBar = true,
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -129,6 +134,7 @@ private fun SaiTopAppBarPreview2() {
 }
 
 private class TopAppBarViewModel : ViewModel() {
+    var showAppBar by mutableStateOf(false)
     var title by mutableStateOf<@Composable () -> Unit>({ }, referentialEqualityPolicy())
     var navigationIcon by mutableStateOf<@Composable () -> Unit>({ }, referentialEqualityPolicy())
     var actions by mutableStateOf<@Composable RowScope.() -> Unit>({ }, referentialEqualityPolicy())
@@ -136,6 +142,7 @@ private class TopAppBarViewModel : ViewModel() {
 
 @Composable
 fun ProvideAppBar(
+    showAppBar: Boolean = true,
     navigationIcon: @Composable () -> Unit = {},
     title: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
@@ -146,7 +153,8 @@ fun ProvideAppBar(
             viewModelStoreOwner = owner,
             initializer = { TopAppBarViewModel() },
         )
-        LaunchedEffect(title, navigationIcon, actions) {
+        LaunchedEffect(showAppBar, title, navigationIcon, actions) {
+            viewModel.showAppBar = showAppBar
             viewModel.title = title
             viewModel.navigationIcon = navigationIcon
             viewModel.actions = actions

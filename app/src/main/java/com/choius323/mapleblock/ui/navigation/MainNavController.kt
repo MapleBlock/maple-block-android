@@ -1,14 +1,25 @@
 package com.choius323.mapleblock.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.choius323.mapleblock.ui.screen.community.CommunityScreen
+import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeArticleScreen
+import com.choius323.mapleblock.ui.screen.notice.NoticeScreen
+import com.choius323.mapleblock.ui.screen.setting.ProfileScreen
+import com.choius323.mapleblock.ui.screen.setting.SettingScreen
+import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
+import com.choius323.mapleblock.ui.screen.writepost.WritePostScreen
+import kotlinx.coroutines.launch
 
 @Stable
 class MainNavController(controller: NavHostController) : MBNavController(controller)
@@ -16,24 +27,57 @@ class MainNavController(controller: NavHostController) : MBNavController(control
 @Composable
 fun MainNavController(
     modifier: Modifier = Modifier,
-    mainNavController: MainNavController = rememberMBNavController(),
+    navController: MainNavController = rememberMBNavController(),
+    snackBarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
-    val navController = mainNavController.navController
+    val coroutineScope = rememberCoroutineScope()
+
+    MainBackHandler(navController)
 
     NavHost(
-        navController = navController,
-        modifier = modifier,
-        startDestination = NavItem.BottomNav,
+        navController = navController.navController,
+        startDestination = NavItem.BottomNavItem.Home,
+        modifier = modifier
     ) {
-        composable<NavItem.BottomNav> { backStackEntry ->
-            BottomNavController(Modifier.fillMaxSize(), goToNoticeArticle = { id ->
-                navController.navigate(NavItem.NoticeArticle(id))
+        composable<NavItem.BottomNavItem.Home> { backStackEntry ->
+            HomeScreen(
+                showSnackBar = {
+                    coroutineScope.launch {
+                        snackBarHostState.showSnackbar(it)
+                    }
+                },
+                goToNoticeArticle = {
+                    navController.navigate(NavItem.NoticeArticle(it))
+                }
+            )
+        }
+        composable<NavItem.BottomNavItem.Notice> { backStackEntry ->
+            NoticeScreen()
+        }
+        composable<NavItem.BottomNavItem.Community> { backStackEntry ->
+            CommunityScreen(Modifier.fillMaxSize()) {
+                navController.navigate(NavItem.WritePost)
+            }
+        }
+        composable<NavItem.BottomNavItem.WhitePaper> { backStackEntry ->
+            WhitePaperScreen()
+        }
+        composable<NavItem.BottomNavItem.Setting> { backStackEntry ->
+            SettingScreen(goProfileScreen = {
+                navController.navigate(NavItem.Profile)
             })
+        }
+        composable<NavItem.WritePost> {
+            WritePostScreen(Modifier.fillMaxSize()) {
+                navController.upPress()
+            }
+        }
+        composable<NavItem.Profile> {
+            ProfileScreen()
         }
         composable<NavItem.NoticeArticle> { backStackEntry ->
             val notice = backStackEntry.savedStateHandle.toRoute<NavItem.NoticeArticle>()
-            println("notice: $notice")
-            NoticeArticleScreen(Modifier.fillMaxSize())
+            NoticeArticleScreen(notice.id, Modifier.fillMaxSize())
         }
     }
 }
