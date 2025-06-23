@@ -1,7 +1,5 @@
 package com.choius323.mapleblock.ui.screen.home
 
-import android.app.Activity
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -9,17 +7,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.sp
+import com.choius323.mapleblock.ui.component.MBText
+import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.screen.home.HomeSideEffect.ShowToast
-import com.choius323.mapleblock.ui.screen.splash.SplashActivity
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -34,6 +33,12 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.collectAsState()
     val context = LocalContext.current
+
+    ProvideAppBar(
+        showAppBar = true,
+        navigationIcon = { MBText("Maple Story U 백서", fontSize = 28.sp) },
+        actions = { Icon(Icons.AutoMirrored.Default.ArrowForward, null) }
+    )
 
     viewModel.collectSideEffect {
         when (it) {
