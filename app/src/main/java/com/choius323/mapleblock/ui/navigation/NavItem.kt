@@ -52,24 +52,15 @@ sealed interface NavItem {
 
         companion object {
             val list: List<BottomNavItem>
-                get() = listOf(Home, Notice, Community, WhitePaper, Setting)
+                get() = listOf(Home, NoticeList, Community, WhitePaper, Setting)
         }
     }
-
-    @Serializable
-    data object BottomNav : NavItem
 
     @Serializable
     data class NoticeArticle(val id: Int) : NavItem
 
     @Serializable
-    data object SettingMain : NavItem
-
-    @Serializable
     data object Profile : NavItem
-
-    @Serializable
-    data object CommunityMain : NavItem
 
     @Serializable
     data object WritePost : NavItem
