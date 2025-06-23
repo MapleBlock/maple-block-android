@@ -34,18 +34,23 @@ class WritePostViewModel(
         reduce {
             state.copy(isLoading = true)
         }
-        val result = writePostUseCase(state.title, state.content)
-        reduce {
-            state.copy(isLoading = false)
-        }
-        if (result.isSuccess) {
-            postSideEffect(WritePostSideEffect.PostSuccess)
-        } else {
-            postSideEffect(
-                WritePostSideEffect.ShowToast(
-                    result.exceptionOrNull()?.message ?: "Unknown error"
+
+        writePostUseCase(state.title, state.content).collect { result ->
+            if (result.isSuccess) {
+                postSideEffect(WritePostSideEffect.PostSuccess)
+                reduce {
+                    state.copy(isLoading = false)
+                }
+            } else {
+                postSideEffect(
+                    WritePostSideEffect.ShowToast(
+                        result.exceptionOrNull()?.message ?: "Unknown error"
+                    )
                 )
-            )
+                reduce {
+                    state.copy(isLoading = false)
+                }
+            }
         }
     }
 }

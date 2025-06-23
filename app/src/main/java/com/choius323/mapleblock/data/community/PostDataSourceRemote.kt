@@ -1,18 +1,20 @@
 package com.choius323.mapleblock.data.community
 
 import com.choius323.mapleblock.ui.model.WritePost
-import kotlinx.coroutines.CoroutineDispatcher
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 interface PostDataSourceRemote {
-    suspend fun writePost(post: WritePost): Result<Unit>
+    suspend fun writePost(post: WritePost): Flow<Result<Unit>>
 }
 
 class PostDataSourceRemoteImpl(
-    private val ioDispatcher: CoroutineDispatcher
+    val client: HttpClient,
 ) : PostDataSourceRemote {
-    override suspend fun writePost(post: WritePost): Result<Unit> {
+    override suspend fun writePost(post: WritePost): Flow<Result<Unit>> = flow {
         delay(1000L)
-        return Result.success(Unit)
+        emit(Result.success(Unit))
     }
 }
