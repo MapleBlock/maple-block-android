@@ -27,7 +27,7 @@ sealed interface NavItem {
         }
 
         @Serializable
-        data object Notice : BottomNavItem {
+        data object NoticeList : BottomNavItem {
             override val iconRes: Int = R.drawable.ic_notice
             override val nameRes: Int = R.string.bottom_nav_notice
         }

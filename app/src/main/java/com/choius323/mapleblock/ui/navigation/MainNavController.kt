@@ -1,12 +1,14 @@
 package com.choius323.mapleblock.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,7 +16,7 @@ import androidx.navigation.toRoute
 import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeArticleScreen
-import com.choius323.mapleblock.ui.screen.notice.NoticeScreen
+import com.choius323.mapleblock.ui.screen.notice.NoticeListScreen
 import com.choius323.mapleblock.ui.screen.setting.ProfileScreen
 import com.choius323.mapleblock.ui.screen.setting.SettingScreen
 import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
@@ -51,8 +53,15 @@ fun MainNavController(
                 }
             )
         }
-        composable<NavItem.BottomNavItem.Notice> { backStackEntry ->
-            NoticeScreen()
+        composable<NavItem.BottomNavItem.NoticeList> { backStackEntry ->
+            NoticeListScreen(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                goNoticeArticleScreen = {
+                    navController.navigate(NavItem.NoticeArticle(it.toInt()))
+                }
+            )
         }
         composable<NavItem.BottomNavItem.Community> { backStackEntry ->
             CommunityScreen(Modifier.fillMaxSize()) {

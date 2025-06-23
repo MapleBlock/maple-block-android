@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Notice(
+    val id: Long = 0L,
     val title: String = "title",
-    val content: String = "content"
+    val content: String = "content",
 )

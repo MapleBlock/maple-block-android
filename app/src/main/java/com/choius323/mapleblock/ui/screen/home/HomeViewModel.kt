@@ -24,6 +24,7 @@ class HomeViewModel(
         reduce {
             state.copy(
                 notices = state.notices + Notice(
+                    state.notices.size.toLong(),
                     "title ${state.notices.size}",
                     "content ${state.notices.size}"
                 )
