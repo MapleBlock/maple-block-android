@@ -64,4 +64,7 @@ sealed interface NavItem {
 
     @Serializable
     data object WritePost : NavItem
+
+    @Serializable
+    data object Onboarding : NavItem
 }

@@ -17,6 +17,7 @@ import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeArticleScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeListScreen
+import com.choius323.mapleblock.ui.screen.onboarding.OnboardingScreen
 import com.choius323.mapleblock.ui.screen.setting.ProfileScreen
 import com.choius323.mapleblock.ui.screen.setting.SettingScreen
 import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
@@ -38,7 +39,7 @@ fun MainNavController(
 
     NavHost(
         navController = navController.navController,
-        startDestination = NavItem.BottomNavItem.Home,
+        startDestination = NavItem.Onboarding,
         modifier = modifier
     ) {
         composable<NavItem.BottomNavItem.Home> { backStackEntry ->
@@ -87,6 +88,19 @@ fun MainNavController(
         composable<NavItem.NoticeArticle> { backStackEntry ->
             val notice = backStackEntry.savedStateHandle.toRoute<NavItem.NoticeArticle>()
             NoticeArticleScreen(notice.id, Modifier.fillMaxSize())
+        }
+        composable<NavItem.Onboarding> { backStackEntry ->
+            OnboardingScreen(
+                modifier = Modifier.fillMaxSize(),
+                goLogin = {
+                    navController.navigate(NavItem.BottomNavItem.Home) {
+                        launchSingleTop = true
+                        popUpTo(NavItem.Onboarding) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
     }
 }
