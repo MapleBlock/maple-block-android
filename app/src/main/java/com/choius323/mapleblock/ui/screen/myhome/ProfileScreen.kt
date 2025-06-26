@@ -1,4 +1,4 @@
-package com.choius323.mapleblock.ui.screen.setting
+package com.choius323.mapleblock.ui.screen.myhome
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

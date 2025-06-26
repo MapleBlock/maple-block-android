@@ -15,11 +15,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
+import com.choius323.mapleblock.ui.screen.myhome.MyHomeScreen
+import com.choius323.mapleblock.ui.screen.myhome.ProfileScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeArticleScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeListScreen
 import com.choius323.mapleblock.ui.screen.onboarding.OnboardingScreen
-import com.choius323.mapleblock.ui.screen.setting.ProfileScreen
-import com.choius323.mapleblock.ui.screen.setting.SettingScreen
 import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
 import com.choius323.mapleblock.ui.screen.writepost.WritePostScreen
 import kotlinx.coroutines.launch
@@ -72,8 +72,8 @@ fun MainNavController(
         composable<NavItem.BottomNavItem.WhitePaper> { backStackEntry ->
             WhitePaperScreen()
         }
-        composable<NavItem.BottomNavItem.Setting> { backStackEntry ->
-            SettingScreen(goProfileScreen = {
+        composable<NavItem.BottomNavItem.MyHome> { backStackEntry ->
+            MyHomeScreen(goProfileScreen = {
                 navController.navigate(NavItem.Profile)
             })
         }

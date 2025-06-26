@@ -45,14 +45,14 @@ sealed interface NavItem {
         }
 
         @Serializable
-        data object Setting : BottomNavItem {
+        data object MyHome : BottomNavItem {
             override val iconRes: Int = R.drawable.ic_setting
             override val nameRes: Int = R.string.bottom_nav_setting
         }
 
         companion object {
             val list: List<BottomNavItem>
-                get() = listOf(Home, NoticeList, Community, WhitePaper, Setting)
+                get() = listOf(Home, NoticeList, Community, WhitePaper, MyHome)
         }
     }
 
