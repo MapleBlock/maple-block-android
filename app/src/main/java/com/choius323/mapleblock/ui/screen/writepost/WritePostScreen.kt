@@ -10,14 +10,17 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.MBTextField
 import com.choius323.mapleblock.ui.component.ProvideAppBar
+import com.choius323.mapleblock.ui.theme.MBTheme
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -50,53 +53,50 @@ fun WritePostScreen(
             )
         }
     )
-    WritePostScreen(
-        modifier = modifier,
-        uiState = uiState,
-        onIntent = viewModel::onIntent,
-    )
-}
-
-@Composable
-fun WritePostScreen(
-    modifier: Modifier = Modifier,
-    uiState: WritePostUiState,
-    onIntent: (WritePostIntent) -> Unit,
-) {
     if (uiState.isLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     }
-    WritePostBody(
-        title = uiState.title,
-        content = uiState.content,
-        onIntent = onIntent,
+    WritePostScreenContent(
         modifier = modifier,
+        uiState = uiState,
+        onEvent = viewModel::onEvent,
     )
 }
 
 @Composable
-private fun WritePostBody(
+private fun WritePostScreenContent(
+    uiState: WritePostUiState,
     modifier: Modifier = Modifier,
-    title: String = "",
-    content: String = "",
-    onIntent: (WritePostIntent) -> Unit,
+    onEvent: (WritePostIntent) -> Unit,
 ) {
     Column(modifier) {
         MBTextField(
-            value = title,
-            onValueChange = { onIntent(WritePostIntent.OnTitleChange(title)) },
+            value = uiState.title,
+            onValueChange = { onEvent(WritePostIntent.OnTitleChange(uiState.title)) },
             hint = "제목을 입력하세요",
             singleLine = true,
         )
         MBTextField(
-            value = content,
-            onValueChange = { onIntent(WritePostIntent.OnContentChange(content)) },
+            value = uiState.content,
+            onValueChange = { onEvent(WritePostIntent.OnContentChange(uiState.content)) },
             hint = "내용을 입력하세요",
         )
-        Button({ onIntent(WritePostIntent.OnWritePost) }) {
+        Button({ onEvent(WritePostIntent.OnWritePost) }) {
             MBText(text = "등록")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun WritePostScreenContentPreview() {
+    MBTheme {
+        Surface {
+            WritePostScreen(
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }

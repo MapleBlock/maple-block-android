@@ -17,8 +17,8 @@ import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.myhome.MyHomeScreen
 import com.choius323.mapleblock.ui.screen.myhome.ProfileScreen
-import com.choius323.mapleblock.ui.screen.notice.NoticeArticleScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeListScreen
+import com.choius323.mapleblock.ui.screen.noticearticle.NoticeArticleScreen
 import com.choius323.mapleblock.ui.screen.onboarding.OnboardingScreen
 import com.choius323.mapleblock.ui.screen.whitepaper.WhitePaperScreen
 import com.choius323.mapleblock.ui.screen.writepost.WritePostScreen

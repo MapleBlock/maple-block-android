@@ -12,7 +12,7 @@ class WritePostViewModel(
     override val container: Container<WritePostUiState, WritePostSideEffect> =
         container(WritePostUiState())
 
-    fun onIntent(intent: WritePostIntent) = when (intent) {
+    fun onEvent(intent: WritePostIntent) = when (intent) {
         is WritePostIntent.OnTitleChange -> onTitleChanged(intent)
         is WritePostIntent.OnContentChange -> onContentChanged(intent)
         is WritePostIntent.OnWritePost -> onWritePost()
