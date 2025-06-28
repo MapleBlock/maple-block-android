@@ -1,5 +1,6 @@
 package com.choius323.mapleblock.di
 
+import com.choius323.mapleblock.ui.screen.community.CommunityListViewModel
 import com.choius323.mapleblock.ui.screen.home.HomeViewModel
 import com.choius323.mapleblock.ui.screen.notice.NoticeListViewModel
 import com.choius323.mapleblock.ui.screen.onboarding.OnboardingViewModel
@@ -12,4 +13,5 @@ val uiModule = module {
     viewModelOf(::WritePostViewModel)
     viewModelOf(::NoticeListViewModel)
     viewModelOf(::OnboardingViewModel)
+    viewModelOf(::CommunityListViewModel)
 }
