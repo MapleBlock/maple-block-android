@@ -47,7 +47,7 @@ fun MBChip(
                 Modifier.size(16.dp),
                 // tint = Color.Blue
             )
-            Spacer(Modifier.width(0.5.dp))
+            Spacer(Modifier.width(4.dp))
         }
         MBText(
             text = text,
