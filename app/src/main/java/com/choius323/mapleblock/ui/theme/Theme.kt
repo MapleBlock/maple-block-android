@@ -31,7 +31,7 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color.Black,
     error = ErrorRed, // 피드백 에러 색상
     onError = Color.White,
-    outline = Gray70, // 테두리/외곽선에 Neutral 70% 사용 (입력 필드 테두리 D1D1D6 과 일치)
+    outline = Color.Black, // 테두리/외곽선에 Neutral 70% 사용 (입력 필드 테두리 D1D1D6 과 일치)
 )
 
 private val DarkColorScheme = darkColorScheme(
@@ -53,7 +53,7 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = Color.White,
     error = ErrorRed, //
     onError = Color.White,
-    outline = Gray30, // 다크 테마에서 외곽선을 위한 더 어두운 회색
+    outline = Color.Black, // 다크 테마에서 외곽선을 위한 더 어두운 회색
 )
 
 @Composable

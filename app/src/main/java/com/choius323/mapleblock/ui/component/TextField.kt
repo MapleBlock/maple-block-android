@@ -12,13 +12,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.MBTheme
 
-
-// 5.2 입력 필드(Input) 컴포넌트 [cite: 14]
 @Composable
 fun MBTextField(
     value: String,
@@ -30,13 +29,12 @@ fun MBTextField(
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.outline, // border: 1px solid #D1D1D6 [cite: 14] -> MaterialTheme.colorScheme.outline
-                shape = MaterialTheme.shapes.small // border-radius: 6px [cite: 14] -> MaterialTheme.shapes.small (6.dp)
+                color = MaterialTheme.colorScheme.outline,
+                shape = RectangleShape,
             )
-            .padding(12.dp) // padding: 12px [cite: 14]
+            .padding(16.dp),
     ) {
         BasicTextField(
             value = value,
