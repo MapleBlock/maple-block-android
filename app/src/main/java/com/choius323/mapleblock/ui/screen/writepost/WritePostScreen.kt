@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -175,7 +176,7 @@ private fun WritePostScreenContent(
                 contentColor = Gray70,
             )
         ) {
-            MBText(text = "게시하기")
+            MBText(text = "게시하기", color = Gray70, fontSize = 18.sp)
         }
     }
 }
@@ -193,14 +194,17 @@ fun CategorySection(
             .padding(bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MBText(text = "카테고리 선택")
-        Box(
-            Modifier
-                .padding(top = 2.67.dp, start = 2.67.dp)
-                .size(4.dp)
-                .rotate(45f)
-                .background(MaterialTheme.colorScheme.primary)
-        )
+        Row {
+            MBText(text = "카테고리 선택")
+            Box(
+                Modifier
+                    .align(Alignment.Top)
+                    .padding(top = 3.dp, start = 2.67.dp)
+                    .size(4.dp)
+                    .rotate(45f)
+                    .background(MaterialTheme.colorScheme.error)
+            )
+        }
         Spacer(Modifier.weight(1f))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             for ((index, category) in categoryList.withIndex()) {
@@ -232,7 +236,7 @@ private fun InputSection(
                     .padding(top = 3.dp, start = 2.67.dp)
                     .size(4.dp)
                     .rotate(45f)
-                    .background(MaterialTheme.colorScheme.primary)
+                    .background(MaterialTheme.colorScheme.error)
             )
             if (showInformation) {
                 Spacer(Modifier.weight(1f))
@@ -245,7 +249,9 @@ private fun InputSection(
             onValueChange = { onTextChange(it) },
             hint = "${sectionType}을 입력해주세요.",
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 290.dp)
         )
     }
 }
