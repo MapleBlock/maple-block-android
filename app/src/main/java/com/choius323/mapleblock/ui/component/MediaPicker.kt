@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 fun getImagePicker(
     maxImageCount: Int,
     onCancel: () -> Unit = {},
-    onImagePicked: (List<Uri>) -> Unit,
+    onImagePicked: (List<Uri?>) -> Unit,
 ): () -> Unit {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
         val launcher = rememberLauncherForActivityResult(

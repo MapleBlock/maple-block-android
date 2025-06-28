@@ -1,4 +1,4 @@
-package com.choius323.mapleblock.ui.screen.notice
+package com.choius323.mapleblock.ui.screen.noticearticle
 
 import android.net.Uri
 import androidx.compose.foundation.layout.Column
@@ -48,7 +48,7 @@ fun NoticeArticleScreen(
         )
         val imagePicker = getImagePicker(10) {
             imageUris.clear()
-            imageUris.addAll(it)
+            // imageUris.addAll(it)
         }
         HandlePermissionActions(
             permissionState,

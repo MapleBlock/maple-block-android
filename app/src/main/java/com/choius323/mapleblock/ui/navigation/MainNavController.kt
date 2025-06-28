@@ -78,9 +78,11 @@ fun MainNavController(
             })
         }
         composable<NavItem.WritePost> {
-            WritePostScreen(Modifier.fillMaxSize()) {
-                navController.upPress()
-            }
+            WritePostScreen(
+                Modifier.fillMaxSize(),
+                goBack = { navController.upPress() },
+                onSuccessPost = { navController.upPress() },
+            )
         }
         composable<NavItem.Profile> {
             ProfileScreen()

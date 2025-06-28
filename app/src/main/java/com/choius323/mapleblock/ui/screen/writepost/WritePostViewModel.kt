@@ -16,6 +16,14 @@ class WritePostViewModel(
         is WritePostIntent.OnTitleChange -> onTitleChanged(intent)
         is WritePostIntent.OnContentChange -> onContentChanged(intent)
         is WritePostIntent.OnWritePost -> onWritePost()
+        is WritePostIntent.OnBackPressed -> intent {
+            postSideEffect(WritePostSideEffect.GoBack)
+        }
+
+        is WritePostIntent.SetImageUrlStr -> setImageUrlStr(intent)
+        is WritePostIntent.SelectImages -> intent {
+            postSideEffect(WritePostSideEffect.SelectImages)
+        }
     }
 
     private fun onTitleChanged(intent: WritePostIntent.OnTitleChange) = intent {
@@ -51,6 +59,12 @@ class WritePostViewModel(
                     state.copy(isLoading = false)
                 }
             }
+        }
+    }
+
+    private fun setImageUrlStr(intent: WritePostIntent.SetImageUrlStr) = intent {
+        reduce {
+            state.copy(imageUrlStrList = intent.strList)
         }
     }
 }
