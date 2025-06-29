@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddToPhotos
@@ -134,7 +135,10 @@ private fun WritePostScreenContent(
     modifier: Modifier = Modifier,
     onEvent: (WritePostIntent) -> Unit,
 ) {
-    Column(modifier.padding(horizontal = 16.dp)) {
+    val scrollState = rememberScrollState()
+    Column(modifier
+        .padding(horizontal = 16.dp)
+        .verticalScroll(scrollState)) {
         CategorySection(
             modifier = Modifier.fillMaxWidth(),
             categoryList = listOf("가이드", "자유"),
@@ -155,7 +159,11 @@ private fun WritePostScreenContent(
             onTextChange = { onEvent(WritePostIntent.OnContentChange(it)) },
             showInformation = false,
             modifier = Modifier.fillMaxWidth(),
+            textFieldModifier = Modifier
+                .fillMaxWidth()
+                .heightIn(290.dp),
             sectionType = "본문",
+            singleLine = false
         )
         HorizontalDivider(thickness = 2.dp, color = Gray70)
         ImageAttachmentRow(
@@ -224,6 +232,8 @@ private fun InputSection(
     showInformation: Boolean,
     sectionType: String,
     modifier: Modifier = Modifier,
+    textFieldModifier: Modifier = Modifier,
+    singleLine: Boolean = true,
     onTextChange: (String) -> Unit,
 ) {
     Column(modifier.padding(vertical = 16.dp)) {
@@ -248,10 +258,8 @@ private fun InputSection(
             value = text,
             onValueChange = { onTextChange(it) },
             hint = "${sectionType}을 입력해주세요.",
-            singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 290.dp)
+            singleLine = singleLine,
+            modifier = textFieldModifier
         )
     }
 }
