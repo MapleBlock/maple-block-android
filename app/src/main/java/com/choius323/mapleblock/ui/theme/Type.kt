@@ -2,67 +2,106 @@ package com.choius323.mapleblock.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import com.choius323.mapleblock.R
 
-// WSG에 명시된 시스템 폰트 스택 정의
-//val SystemFontFamily = FontFamily(
-//    // Compose는 CSS 시스템 폰트 스택 문자열을 직접 지원하지 않습니다.
-//    // 일반적으로는 폰트 대체 순서를 정의하거나 Compose의 기본 폰트 해결에 의존합니다.
-//    // 여기서는 일반적인 sans-serif로 정의하고 OS의 폰트 렌더링에 의존합니다.
-//)
-val SystemFontFamily = FontFamily.SansSerif
+// 1. 폰트 패밀리 정의
+val DnfBeatFamily = FontFamily(
+    Font(R.font.dnf_bit_bit, FontWeight.Normal) // '던파비트' 폰트
+)
+
+val PretendardFamily = FontFamily(
+    Font(R.font.pretendard, FontWeight.Normal), // Pretendard Regular (400)
+    Font(R.font.pretendard, FontWeight.Medium),  // Pretendard Medium (500)
+    Font(R.font.pretendard, FontWeight.SemiBold) // Pretendard SemiBold (600)
+)
+
+// 2. MBType 객체 정의
+object MBTypo {
+    val Heading1 = TextStyle(
+        fontFamily = DnfBeatFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 34.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Heading2 = TextStyle(
+        fontFamily = DnfBeatFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 32.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Title1 = TextStyle(
+        fontFamily = DnfBeatFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 30.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Title2 = TextStyle(
+        fontFamily = DnfBeatFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 28.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Subtitle1 = TextStyle(
+        fontFamily = PretendardFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 22.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Subtitle2 = TextStyle(
+        fontFamily = PretendardFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 18.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Body1 = TextStyle(
+        fontFamily = PretendardFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Body2 = TextStyle(
+        fontFamily = PretendardFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Body3 = TextStyle(
+        fontFamily = PretendardFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+    val Caption = TextStyle(
+        fontFamily = PretendardFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 1.4.em,
+        letterSpacing = (-0.01).em
+    )
+}
 
 val Typography = Typography(
-    // Heading 1
-    headlineLarge = TextStyle(
-//        fontFamily = SystemFontFamily,
-        fontWeight = FontWeight(700), // 700
-        fontSize = 32.sp, // 32px
-        lineHeight = 40.sp // 40px
-    ),
-    // Heading 2
-    headlineMedium = TextStyle(
-        fontFamily = SystemFontFamily,
-        fontWeight = FontWeight(600), // 600
-        fontSize = 24.sp, // 24px
-        lineHeight = 32.sp // 32px
-    ),
-    // Heading 3
-    headlineSmall = TextStyle(
-        fontFamily = SystemFontFamily,
-        fontWeight = FontWeight(600), // 600
-        fontSize = 20.sp, // 20px
-        lineHeight = 28.sp // 28px
-    ),
-    // Body
-    bodyLarge = TextStyle( // 주요 Body 텍스트에 bodyLarge 사용
-        fontFamily = SystemFontFamily,
-        fontWeight = FontWeight(400), // 400
-        fontSize = 16.sp, // 16px
-        lineHeight = 24.sp // 24px
-    ),
-    // Caption
-    bodySmall = TextStyle( // Caption 텍스트에 bodySmall 사용
-        fontFamily = SystemFontFamily,
-        fontWeight = FontWeight(400), // 400
-        fontSize = 14.sp, // 14px
-        lineHeight = 20.sp // 20px
-    ),
-    // Button Text
-    labelLarge = TextStyle( // 버튼 텍스트에 labelLarge 사용
-        fontFamily = SystemFontFamily,
-        fontWeight = FontWeight(600), // 600
-        fontSize = 16.sp, // 16px
-        lineHeight = 24.sp // 24px
-    )
-    /*
-    참고: WSG는 700, 600, 400과 같은 일반적인 폰트 굵기를 지정합니다.
-    Compose의 FontWeight 클래스에는 미리 정의된 값이 있습니다 (예: FontWeight.Bold, FontWeight.SemiBold, FontWeight.Normal).
-    이를 직접 매핑하면 다음과 같습니다:
-    700 -> FontWeight.Bold
-    600 -> FontWeight.SemiBold
-    400 -> FontWeight.Normal
-    */
+    headlineLarge = MBTypo.Heading1,
+    headlineMedium = MBTypo.Heading2,
+    titleLarge = MBTypo.Title1,
+    titleMedium = MBTypo.Title2,
+    titleSmall = MBTypo.Subtitle1,
+    bodyLarge = MBTypo.Subtitle2,
+    bodyMedium = MBTypo.Body1,
+    bodySmall = MBTypo.Body3,
+    labelSmall = MBTypo.Caption,
 )

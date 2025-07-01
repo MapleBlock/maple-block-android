@@ -13,47 +13,31 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 
 private val LightColorScheme = lightColorScheme(
-    primary = TossBlue, //
-    onPrimary = Color.White, // 흰색 텍스트 (명시되지 않았으나 일반적인 대비를 위해)
-    primaryContainer = TossBlue, // WSG에 따라 primary 색상을 컨테이너로 사용
-    onPrimaryContainer = Color.White,
-    secondary = MapleGold, //
-    onSecondary = Color.Black, // 보조 색상 위 검정 텍스트 (대비를 위해 추정)
-    secondaryContainer = MapleGold, //
-    onSecondaryContainer = Color.Black,
-    tertiary = CosmosPurple, //
-    onTertiary = Color.White,
-    tertiaryContainer = CosmosPurple, //
-    onTertiaryContainer = Color.White,
-    background = Gray90, // 배경으로 Neutral 90% 사용
-    onBackground = Color.Black, // 밝은 배경 위 검정 텍스트 (추정)
-    surface = Color.White, // 카드 배경 색상
-    onSurface = Color.Black,
-    error = ErrorRed, // 피드백 에러 색상
-    onError = Color.White,
-    outline = Color.Black, // 테두리/외곽선에 Neutral 70% 사용 (입력 필드 테두리 D1D1D6 과 일치)
+    primary = MBColor.Primary,
+    onPrimary = MBColor.White,
+    background = MBColor.White,
+    onBackground = MBColor.Gray500, // 폰트 메인
+    surface = MBColor.Gray100,
+    onSurface = MBColor.Gray500,    // 폰트 메인
+    error = MBColor.Error,
+    onError = MBColor.White,
+    primaryContainer = MBColor.Primary, // WSG에 따라 primary 색상을 컨테이너로 사용
+    onPrimaryContainer = MBColor.White,
+    outline = MBColor.Black,
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = TossBlue, //
-    onPrimary = Color.White,
-    primaryContainer = TossBlueDark, // 다크 테마에서 컨테이너로 Primary Dark 사용
-    onPrimaryContainer = Color.White,
-    secondary = MapleGold, //
-    onSecondary = Color.Black,
-    secondaryContainer = MapleGold, //
-    onSecondaryContainer = Color.Black,
-    tertiary = CosmosPurple, //
-    onTertiary = Color.White,
-    tertiaryContainer = CosmosPurple, //
-    onTertiaryContainer = Color.White,
+    primary = MBColor.Primary, //
+    onPrimary = MBColor.White,
     background = Color.Black, // 다크 테마를 위한 어두운 배경
     onBackground = Color.White,
-    surface = Color(0xFF121212), // 다크 테마를 위한 어두운 표면
-    onSurface = Color.White,
-    error = ErrorRed, //
-    onError = Color.White,
-    outline = Color.Black, // 다크 테마에서 외곽선을 위한 더 어두운 회색
+    surface = MBColor.Gray700, // 다크 테마를 위한 어두운 표면
+    onSurface = MBColor.White,
+    error = MBColor.Error, //
+    onError = MBColor.White,
+    primaryContainer = MBColor.Primary, // 다크 테마에서 컨테이너로 Primary Dark 사용
+    onPrimaryContainer = MBColor.White,
+    outline = MBColor.Gray200, // 다크 테마에서 외곽선을 위한 더 어두운 회색
 )
 
 @Composable
