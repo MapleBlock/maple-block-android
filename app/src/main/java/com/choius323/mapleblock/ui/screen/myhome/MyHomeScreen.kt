@@ -36,7 +36,9 @@ import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.theme.ErrorRed
 import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.Gray90
+import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 
 @Composable
 fun MyHomeScreen(
@@ -45,7 +47,7 @@ fun MyHomeScreen(
 ) {
     ProvideAppBar(
         showAppBar = true,
-        navigationIcon = { MBText("마이홈", fontSize = 28.sp) },
+        navigationIcon = { MBText("마이홈", style = MBTypo.Title2) },
     )
     MyHomeScreenContent(
         modifier = modifier,
@@ -94,12 +96,12 @@ fun ProfileSection(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(8.dp))
         MBText(
             text = "오노고오",
-            fontSize = 28.sp,
+            style = MBTypo.Subtitle1,
         )
         MBText(
             text = "maple123@naver.com",
-            color = Gray30,
-            fontSize = 14.sp,
+            color = MBColor.Gray400,
+            style = MBTypo.Body2,
         )
     }
 }
@@ -150,7 +152,7 @@ fun MenuItem(
             .padding(vertical = 13.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MBText(text = text, fontSize = 16.sp, color = textColor)
+        MBText(text = text, style = MBTypo.Body1, color = textColor)
         Spacer(modifier = Modifier.weight(1f))
         if (value != null) {
             MBText(text = value, fontSize = 16.sp, color = Gray30)

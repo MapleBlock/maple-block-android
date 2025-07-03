@@ -66,4 +66,6 @@ object MBColor {
     val X = Color(0xFF000000)
     val Telegram = Color(0xFF28A8EA)
     val Website = Color(0xFFFF7AF9)
+
+    val Transparent = Color.Transparent
 }

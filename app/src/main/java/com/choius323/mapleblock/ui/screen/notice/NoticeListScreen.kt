@@ -23,18 +23,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.component.MBChip
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.model.Notice
+import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -51,7 +50,7 @@ fun NoticeListScreen(
         viewModel.onEvent(NoticeListUiEvent.LoadData("Discord"))
     }
     ProvideAppBar(showAppBar = true, navigationIcon = {
-        MBText("공지사항", fontSize = 28.sp)
+        MBText("공지사항", style = MBTypo.Title2)
     }, actions = {
         Icon(Icons.Default.Search, "검색")
     })
@@ -115,12 +114,12 @@ private fun NoticeListItem(
         MBText(
             "Discord",
             Modifier
-                .background(Color(81, 101, 248))
+                .background(MBColor.Discord)
                 .padding(horizontal = 8.dp, vertical = 4.dp),
             fontSize = 12.sp
         )
-        MBText(notice.title, fontWeight = FontWeight.Bold, fontSize = 18.sp, lineHeight = 1.4.em)
-        MBText("2025. 05. 05", color = Color.Gray, fontSize = 14.sp)
+        MBText(notice.title, style = MBTypo.Subtitle2)
+        MBText("2025. 05. 05", color = MBColor.Gray300, style = MBTypo.Body3)
     }
 }
 

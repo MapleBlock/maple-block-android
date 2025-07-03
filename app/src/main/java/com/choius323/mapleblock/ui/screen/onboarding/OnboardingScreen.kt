@@ -2,7 +2,6 @@ package com.choius323.mapleblock.ui.screen.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,10 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,15 +26,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.R
+import com.choius323.mapleblock.ui.component.MBButton
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.model.OnboardingItem
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
@@ -97,22 +91,11 @@ fun OnboardingScreenContent(
         }
 
         // 하단 로그인 버튼
-        Button(
+        MBButton(
+            text = "로그인 바로가기",
+            modifier = Modifier.fillMaxWidth(),
             onClick = { onEvent(OnboardingUiEvent.OnClickLogin) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .border(1.dp, Color.Black, CutCornerShape(0.dp)),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.onSurface
-            ),
-            shape = CutCornerShape(0.dp)
-        ) {
-            MBText(
-                text = "로그인 바로가기", fontSize = 16.sp, fontWeight = FontWeight.Bold,
-            )
-        }
+        )
     }
 }
 
@@ -133,23 +116,19 @@ fun OnboardingPageItem(item: OnboardingItem) {
             contentDescription = item.title,
             modifier = Modifier
                 .aspectRatio(1f)
-                .height(300.dp)
-                .background(Color.LightGray, RoundedCornerShape(8.dp)),
+                .height(300.dp),
             contentScale = ContentScale.Crop,
         )
         Spacer(modifier = Modifier.height(40.dp))
 
         MBText(
-            text = item.title, style = MaterialTheme.typography.headlineSmall.copy(
-                fontWeight = FontWeight.Bold, textAlign = TextAlign.Center
-            )
+            text = item.title,
+            style = MBTypo.Title2
         )
         Spacer(modifier = Modifier.height(8.dp))
         MBText(
             text = item.description,
-            style = MaterialTheme.typography.bodyLarge.copy(
-                textAlign = TextAlign.Center
-            ),
+            style = MBTypo.Title2
         )
     }
 }

@@ -1,5 +1,7 @@
 package com.choius323.mapleblock.ui.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.SnackbarHostState
@@ -40,7 +42,9 @@ fun MainNavController(
     NavHost(
         navController = navController.navController,
         startDestination = NavItem.Onboarding,
-        modifier = modifier
+        modifier = modifier,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
     ) {
         composable<NavItem.BottomNavItem.Home> { backStackEntry ->
             HomeScreen(

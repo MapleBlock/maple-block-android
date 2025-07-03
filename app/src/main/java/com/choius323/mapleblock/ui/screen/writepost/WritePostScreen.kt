@@ -22,10 +22,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddToPhotos
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -38,7 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,13 +42,16 @@ import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import coil3.compose.AsyncImage
 import com.choius323.mapleblock.ui.component.HandlePermissionActions
+import com.choius323.mapleblock.ui.component.MBButton
 import com.choius323.mapleblock.ui.component.MBChip
+import com.choius323.mapleblock.ui.component.MBHorizonDivider
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.MBTextField
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.component.getImagePicker
-import com.choius323.mapleblock.ui.theme.Gray70
+import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 import com.choius323.mapleblock.util.readImagePermissions
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -136,16 +135,18 @@ private fun WritePostScreenContent(
     onEvent: (WritePostIntent) -> Unit,
 ) {
     val scrollState = rememberScrollState()
-    Column(modifier
-        .padding(horizontal = 16.dp)
-        .verticalScroll(scrollState)) {
+    Column(
+        modifier
+            .padding(horizontal = 16.dp)
+            .verticalScroll(scrollState)
+    ) {
         CategorySection(
             modifier = Modifier.fillMaxWidth(),
             categoryList = listOf("가이드", "자유"),
             selectedCategoryIndex = 0,
             onCategoryClick = { }
         )
-        HorizontalDivider(thickness = 2.dp, color = Gray70)
+        MBHorizonDivider()
         InputSection(
             text = uiState.title,
             onTextChange = { onEvent(WritePostIntent.OnTitleChange(it)) },
@@ -153,7 +154,7 @@ private fun WritePostScreenContent(
             modifier = Modifier.fillMaxWidth(),
             sectionType = "제목",
         )
-        HorizontalDivider(thickness = 2.dp, color = Gray70)
+        MBHorizonDivider()
         InputSection(
             text = uiState.content,
             onTextChange = { onEvent(WritePostIntent.OnContentChange(it)) },
@@ -165,27 +166,18 @@ private fun WritePostScreenContent(
             sectionType = "본문",
             singleLine = false
         )
-        HorizontalDivider(thickness = 2.dp, color = Gray70)
+        MBHorizonDivider()
         ImageAttachmentRow(
             uiState.imageUrlStrList,
             onEvent = onEvent
         )
-        HorizontalDivider(thickness = 2.dp, color = Gray70)
+        MBHorizonDivider()
         Spacer(Modifier.height(16.dp))
-        Button(
+        MBButton(
             onClick = { onEvent(WritePostIntent.OnWritePost) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(52.dp)
-                .border(2.dp, Gray70),
-            shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent,
-                contentColor = Gray70,
-            )
-        ) {
-            MBText(text = "게시하기", color = Gray70, fontSize = 18.sp)
-        }
+            modifier = Modifier.fillMaxWidth(),
+            text = "게시하기"
+        )
     }
 }
 
@@ -203,7 +195,7 @@ fun CategorySection(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row {
-            MBText(text = "카테고리 선택")
+            MBText(text = "카테고리 선택", style = MBTypo.Subtitle2)
             Box(
                 Modifier
                     .align(Alignment.Top)
@@ -270,10 +262,11 @@ private fun ImageAttachmentRow(
     modifier: Modifier = Modifier,
     onEvent: (WritePostIntent) -> Unit,
 ) {
+    val outlineColor = MaterialTheme.colorScheme.outline
     val imageModifier = remember {
         Modifier
             .size(64.dp)
-            .border(1.dp, Color.Black)
+            .border(1.dp, outlineColor)
     }
     val scrollState = rememberScrollState()
     val imageUriList by remember(imageStrList) {
@@ -288,8 +281,12 @@ private fun ImageAttachmentRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            MBText("사진첨부")
-            MBText("${imageStrList.size}/${WritePostUiState.MAX_IMAGE_COUNT}")
+            MBText("사진첨부", style = MBTypo.Subtitle2)
+            MBText(
+                "${imageStrList.size}/${WritePostUiState.MAX_IMAGE_COUNT}",
+                color = MBColor.Gray400,
+                style = MBTypo.Caption,
+            )
         }
         Spacer(Modifier.height(8.dp))
         Row(

@@ -15,10 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.screen.home.HomeSideEffect.ShowToast
+import com.choius323.mapleblock.ui.theme.MBTypo
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -36,7 +36,7 @@ fun HomeScreen(
 
     ProvideAppBar(
         showAppBar = true,
-        navigationIcon = { MBText("Maple Story U 백서", fontSize = 28.sp) },
+        navigationIcon = { MBText("Maple Story U 백서", style = MBTypo.Title2) },
         actions = { Icon(Icons.AutoMirrored.Default.ArrowForward, null) }
     )
 

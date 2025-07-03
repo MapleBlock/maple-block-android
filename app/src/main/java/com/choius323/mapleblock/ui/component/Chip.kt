@@ -15,14 +15,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.R
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 
 @Composable
 fun MBChip(
@@ -31,11 +33,23 @@ fun MBChip(
     isSelected: Boolean = false,
     onClick: () -> Unit = {},
 ) {
+    val borderColor = MaterialTheme.colorScheme.onSurface
     Row(
         modifier = modifier
             .border(
-                1.dp, MaterialTheme.colorScheme.onSurface, RectangleShape
+                1.dp, borderColor, RectangleShape
             )
+            .drawBehind {
+                if (isSelected) {
+                    val strokeWidth = 2.dp.toPx()
+                    drawLine(
+                        color = borderColor,
+                        start = Offset(0f, size.height), // 왼쪽 하단
+                        end = Offset(size.width, size.height), // 오른쪽 하단
+                        strokeWidth = strokeWidth
+                    )
+                }
+            }
             .clickable(onClick = onClick)
             .padding(vertical = 4.dp, horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -45,13 +59,12 @@ fun MBChip(
                 painterResource(R.drawable.ic_checkbox),
                 "Checked Chip",
                 Modifier.size(16.dp),
-                // tint = Color.Blue
             )
             Spacer(Modifier.width(4.dp))
         }
         MBText(
             text = text,
-            fontSize = 12.sp,
+            style = MBTypo.Caption,
         )
     }
 }
