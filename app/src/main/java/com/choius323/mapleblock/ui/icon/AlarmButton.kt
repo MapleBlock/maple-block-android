@@ -18,7 +18,7 @@ val MBIcons.Pixel.AlarmButton: ImageVector
     get() {
         if (_alarmButton != null) return _alarmButton!!
         _alarmButton = ImageVector.Builder(
-            name = "Icons.Pixel.AlarmButton",
+            name = "MBIcons.Pixel.AlarmButton",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

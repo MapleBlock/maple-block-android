@@ -14,7 +14,7 @@ val MBIcons.Pixel.Delete: ImageVector
     get() {
         if (_delete != null) return _delete!!
         _delete = ImageVector.Builder(
-            name = "Icons.Pixel.Delete",
+            name = "MBIcons.Pixel.Delete",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

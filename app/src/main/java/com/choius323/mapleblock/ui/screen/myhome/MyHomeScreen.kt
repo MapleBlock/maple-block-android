@@ -13,9 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ExitToApp
-import androidx.compose.material.icons.automirrored.rounded.ArrowForwardIos
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +30,8 @@ import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.R
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
+import com.choius323.mapleblock.ui.icon.Forward
+import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.theme.ErrorRed
 import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.Gray90
@@ -159,13 +158,8 @@ fun MenuItem(
             Spacer(modifier = Modifier.width(8.dp))
         }
         if (showArrow) {
-            val icon = if (text.contains("로그아웃"))
-                Icons.AutoMirrored.Filled.ExitToApp
-            else
-                Icons.AutoMirrored.Rounded.ArrowForwardIos
-
             Icon(
-                imageVector = icon,
+                imageVector = MBIcons.Pixel.Forward,
                 contentDescription = text,
                 tint = iconColor,
                 modifier = Modifier.size(18.dp)

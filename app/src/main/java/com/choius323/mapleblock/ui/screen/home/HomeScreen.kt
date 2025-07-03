@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
+import com.choius323.mapleblock.ui.icon.Forward
+import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.screen.home.HomeSideEffect.ShowToast
 import com.choius323.mapleblock.ui.theme.MBTypo
 import org.koin.androidx.compose.koinViewModel
@@ -37,7 +37,7 @@ fun HomeScreen(
     ProvideAppBar(
         showAppBar = true,
         navigationIcon = { MBText("Maple Story U 백서", style = MBTypo.Title2) },
-        actions = { Icon(Icons.AutoMirrored.Default.ArrowForward, null) }
+        actions = { Icon(MBIcons.Pixel.Forward, null) }
     )
 
     viewModel.collectSideEffect {

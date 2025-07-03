@@ -14,7 +14,7 @@ val MBIcons.Pixel.Search: ImageVector
     get() {
         if (_search != null) return _search!!
         _search = ImageVector.Builder(
-            name = "Icons.Pixel.Search",
+            name = "MBIcons.Pixel.Search",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

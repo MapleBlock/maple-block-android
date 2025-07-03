@@ -14,7 +14,7 @@ val MBIcons.Pixel.Back: ImageVector
     get() {
         if (_back != null) return _back!!
         _back = ImageVector.Builder(
-            name = "Icons.Pixel.Back",
+            name = "MBIcons.Pixel.Back",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

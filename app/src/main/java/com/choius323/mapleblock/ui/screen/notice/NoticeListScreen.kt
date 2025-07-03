@@ -13,8 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -30,6 +28,8 @@ import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.component.MBChip
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
+import com.choius323.mapleblock.ui.icon.MBIcons
+import com.choius323.mapleblock.ui.icon.Search
 import com.choius323.mapleblock.ui.model.Notice
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
@@ -52,7 +52,7 @@ fun NoticeListScreen(
     ProvideAppBar(showAppBar = true, navigationIcon = {
         MBText("공지사항", style = MBTypo.Title2)
     }, actions = {
-        Icon(Icons.Default.Search, "검색")
+        Icon(MBIcons.Pixel.Search, "검색")
     })
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {

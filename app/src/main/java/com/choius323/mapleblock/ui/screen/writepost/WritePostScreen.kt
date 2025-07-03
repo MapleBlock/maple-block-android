@@ -19,9 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AddToPhotos
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,6 +44,9 @@ import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.MBTextFieldSection
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.component.getImagePicker
+import com.choius323.mapleblock.ui.icon.AddPicture
+import com.choius323.mapleblock.ui.icon.Back
+import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
 import com.choius323.mapleblock.ui.theme.MBTypo
@@ -97,7 +97,7 @@ fun WritePostScreen(
         showAppBar = true,
         navigationIcon = {
             Icon(
-                Icons.AutoMirrored.Default.ArrowBack,
+                MBIcons.Pixel.Back,
                 contentDescription = "",
                 Modifier.clickable(onClick = onSuccessPost)
             )
@@ -259,7 +259,7 @@ private fun ImageAttachmentRow(
                 val uri = imageUriList.getOrNull(it)
                 if (uri == null) {
                     Icon(
-                        Icons.Default.AddToPhotos,
+                        MBIcons.Pixel.AddPicture,
                         "사진 첨부 버튼",
                         modifier = imageModifier
                             .clickable { onEvent(WritePostIntent.SelectImages) }

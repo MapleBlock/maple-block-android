@@ -14,7 +14,7 @@ val MBIcons.Pixel.ArrowDropUp: ImageVector
     get() {
         if (_arrowDropUp != null) return _arrowDropUp!!
         _arrowDropUp = ImageVector.Builder(
-            name = "Icons.Pixel.ArrowDropUp",
+            name = "MBIcons.Pixel.ArrowDropUp",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.AddAlert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -32,6 +28,9 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.choius323.mapleblock.ui.icon.Back
+import com.choius323.mapleblock.ui.icon.MBIcons
+import com.choius323.mapleblock.ui.icon.Search
 import com.choius323.mapleblock.ui.navigation.MainNavController
 import com.choius323.mapleblock.ui.theme.MBTheme
 
@@ -95,16 +94,15 @@ private fun MBTopAppBarPreview() {
         Surface {
             MBTopAppBar(
                 navigationIcon = {
-                    Icon(Icons.AutoMirrored.Default.ArrowBack, null)
+                    Icon(MBIcons.Pixel.Back, null)
                 },
                 title = {
                     Text("Title Preview", maxLines = 1)
                 },
                 actions = {
-                    Icon(Icons.AutoMirrored.Default.List, null)
-                    Icon(Icons.Default.AddAlert, null)
-                    Icon(Icons.AutoMirrored.Default.List, null)
-                    Icon(Icons.Default.AddAlert, null)
+                    repeat(4) {
+                        Icon(MBIcons.Pixel.Search, null)
+                    }
                 },
                 showAppBar = true,
                 modifier = Modifier.fillMaxWidth()
@@ -120,7 +118,7 @@ private fun MBTopAppBarPreview2() {
         Surface {
             MBTopAppBar(
                 navigationIcon = {
-                    Icon(Icons.AutoMirrored.Default.ArrowBack, null)
+                    Icon(MBIcons.Pixel.Back, null)
                 },
                 title = {
                     MBText("Title Preview 2", maxLines = 1)

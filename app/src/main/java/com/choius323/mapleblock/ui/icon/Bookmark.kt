@@ -14,7 +14,7 @@ val MBIcons.Pixel.Bookmark: ImageVector
     get() {
         if (_bookmark != null) return _bookmark!!
         _bookmark = ImageVector.Builder(
-            name = "Icons.Pixel.Bookmark",
+            name = "MBIcons.Pixel.Bookmark",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

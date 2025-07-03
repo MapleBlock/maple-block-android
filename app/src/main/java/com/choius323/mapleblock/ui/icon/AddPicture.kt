@@ -18,7 +18,7 @@ val MBIcons.Pixel.AddPicture: ImageVector
     get() {
         if (_addPicture != null) return _addPicture!!
         _addPicture = ImageVector.Builder(
-            name = "Icons.Pixel.AddPicture",
+            name = "MBIcons.Pixel.AddPicture",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

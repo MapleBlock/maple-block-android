@@ -14,7 +14,7 @@ val MBIcons.Pixel.Notice: ImageVector
     get() {
         if (_notice != null) return _notice!!
         _notice = ImageVector.Builder(
-            name = "Icons.Pixel.Notice",
+            name = "MBIcons.Pixel.Notice",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

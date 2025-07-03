@@ -3,8 +3,6 @@ package com.choius323.mapleblock.ui.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowForwardIos
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
@@ -13,7 +11,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.choius323.mapleblock.ui.icon.Forward
+import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.MBTheme
 
@@ -78,7 +77,7 @@ fun TextRowBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         MBText(text = text, fontSize = 16.sp, color = Gray30)
-        Icon(Icons.AutoMirrored.Rounded.ArrowForwardIos, "Arrow Forward")
+        Icon(MBIcons.Pixel.Forward, "Arrow Forward")
     }
 }
 

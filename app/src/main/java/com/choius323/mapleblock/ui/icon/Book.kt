@@ -14,7 +14,7 @@ val MBIcons.Pixel.Book: ImageVector
     get() {
         if (_book != null) return _book!!
         _book = ImageVector.Builder(
-            name = "Icons.Pixel.Book",
+            name = "MBIcons.Pixel.Book",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

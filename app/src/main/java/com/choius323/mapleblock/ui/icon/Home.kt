@@ -14,7 +14,7 @@ val MBIcons.Pixel.Home: ImageVector
     get() {
         if (_home != null) return _home!!
         _home = ImageVector.Builder(
-            name = "Icons.Pixel.Home",
+            name = "MBIcons.Pixel.Home",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

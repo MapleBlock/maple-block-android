@@ -14,7 +14,7 @@ val MBIcons.Pixel.Person: ImageVector
     get() {
         if (_person != null) return _person!!
         _person = ImageVector.Builder(
-            name = "Icons.Pixel.Person",
+            name = "MBIcons.Pixel.Person",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

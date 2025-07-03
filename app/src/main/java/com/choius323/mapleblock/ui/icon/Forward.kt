@@ -14,7 +14,7 @@ val MBIcons.Pixel.Forward: ImageVector
     get() {
         if (_forward != null) return _forward!!
         _forward = ImageVector.Builder(
-            name = "Icons.Pixel.Forward",
+            name = "MBIcons.Pixel.Forward",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

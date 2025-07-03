@@ -18,7 +18,7 @@ val MBIcons.Pixel.AddPencil: ImageVector
     get() {
         if (_addPencil != null) return _addPencil!!
         _addPencil = ImageVector.Builder(
-            name = "Icons.Pixel.AddPencil",
+            name = "MBIcons.Pixel.AddPencil",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {

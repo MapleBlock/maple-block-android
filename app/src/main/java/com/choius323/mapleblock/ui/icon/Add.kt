@@ -19,7 +19,7 @@ val MBIcons.Pixel.Add: ImageVector
             return _add!!
         }
         _add = ImageVector.Builder(
-            name = "Icons.Pixel.Add",
+            name = "MBIcons.Pixel.Add",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 24f,

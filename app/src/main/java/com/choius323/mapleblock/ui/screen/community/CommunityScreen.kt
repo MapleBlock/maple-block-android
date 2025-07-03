@@ -16,9 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -34,6 +31,9 @@ import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.component.MBChip
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
+import com.choius323.mapleblock.ui.icon.Add
+import com.choius323.mapleblock.ui.icon.MBIcons
+import com.choius323.mapleblock.ui.icon.Search
 import com.choius323.mapleblock.ui.model.CommunityListItem
 import com.choius323.mapleblock.ui.theme.MBTheme
 import org.koin.androidx.compose.koinViewModel
@@ -51,7 +51,7 @@ fun CommunityScreen(
     ProvideAppBar(
         showAppBar = true,
         navigationIcon = { MBText("커뮤니티", fontSize = 28.sp) },
-        actions = { Icon(Icons.Filled.Search, contentDescription = "Search") }
+        actions = { Icon(MBIcons.Pixel.Search, contentDescription = "Search") }
     )
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {
@@ -101,7 +101,7 @@ fun CommunityScreenContent(
             }
         }
         Icon(
-            Icons.Default.Add,
+            MBIcons.Pixel.Add,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .offset(x = (-16).dp, y = (-24).dp)

@@ -14,7 +14,7 @@ val MBIcons.Pixel.Community: ImageVector
     get() {
         if (_community != null) return _community!!
         _community = ImageVector.Builder(
-            name = "Icons.Pixel.Community",
+            name = "MBIcons.Pixel.Community",
             defaultWidth = 24.dp, defaultHeight = 24.dp,
             viewportWidth = 24f, viewportHeight = 24f
         ).apply {
