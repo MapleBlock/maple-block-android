@@ -3,13 +3,17 @@ package com.choius323.mapleblock.ui.screen.myhome
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
@@ -26,8 +30,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.choius323.mapleblock.R
+import com.choius323.mapleblock.ui.component.MBHorizonDivider
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
+import com.choius323.mapleblock.ui.icon.Edit
 import com.choius323.mapleblock.ui.icon.Forward
 import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.theme.Gray90
@@ -46,22 +52,20 @@ fun MyHomeScreen(
     )
     MyHomeScreenContent(
         modifier = modifier,
-        clickProfile = goProfileScreen
     )
 }
 
 @Composable
 fun MyHomeScreenContent(
     modifier: Modifier = Modifier,
-    clickProfile: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
     Column(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.background)
+            .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        ProfileSection(Modifier.clickable(onClick = clickProfile))
+        ProfileSection(Modifier)
         Spacer(Modifier.height(16.dp))
         HorizontalDivider(
             thickness = 16.dp,
@@ -86,30 +90,44 @@ fun MyHomeScreenContent(
 }
 
 @Composable
-fun ProfileSection(modifier: Modifier = Modifier) {
-    Column(
+fun ProfileSection(
+    modifier: Modifier = Modifier,
+) {
+    Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .padding(horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
-            contentDescription = "Profile Picture",
-            modifier = Modifier
-                .size(144.dp)
-                .clip(RectangleShape)
-                .background(Color.LightGray)
-        )
-        Spacer(Modifier.height(8.dp))
-        MBText(
-            text = "오노고오",
-            style = MBTypo.Subtitle1,
-        )
-        MBText(
-            text = "maple123@naver.com",
-            color = MBColor.Gray400,
-            style = MBTypo.Body2,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .size(64.dp)
+                    .clip(RectangleShape)
+                    .background(Color.LightGray)
+            )
+            Spacer(Modifier.width(16.dp))
+            Column(Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Center) {
+                MBText(
+                    text = "오노고오",
+                    style = MBTypo.Subtitle1,
+                )
+                MBText(
+                    text = "maple123@naver.com",
+                    color = MBColor.Gray400,
+                    style = MBTypo.Body2,
+                )
+            }
+        }
+        Icon(
+            MBIcons.Pixel.Edit,
+            contentDescription = "프로필 편집",
+            modifier = Modifier.clickable(onClick = {})
         )
     }
 }
@@ -130,11 +148,9 @@ fun MenuItems(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun MenuDivider(modifier: Modifier = Modifier) {
-    HorizontalDivider(
+private fun MenuDivider(modifier: Modifier = Modifier) {
+    MBHorizonDivider(
         modifier = modifier.padding(vertical = 8.dp),
-        thickness = 2.dp,
-        color = Gray90,
     )
 }
 
