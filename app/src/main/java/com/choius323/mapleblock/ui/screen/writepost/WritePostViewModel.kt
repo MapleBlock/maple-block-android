@@ -24,6 +24,19 @@ class WritePostViewModel(
         is WritePostIntent.SelectImages -> intent {
             postSideEffect(WritePostSideEffect.SelectImages)
         }
+
+        is WritePostIntent.ImageDelete -> intent {
+            reduce {
+                println(intent.index)
+                println(state.imageUrlStrList)
+                println(state.imageUrlStrList.filterIndexed { index, _ -> index != intent.index })
+                state.copy(imageUrlStrList = state.imageUrlStrList.filterIndexed { index, _ ->
+                    println(
+                        "$index ${intent.index}"
+                    );index != intent.index
+                })
+            }
+        }
     }
 
     private fun onTitleChanged(intent: WritePostIntent.OnTitleChange) = intent {

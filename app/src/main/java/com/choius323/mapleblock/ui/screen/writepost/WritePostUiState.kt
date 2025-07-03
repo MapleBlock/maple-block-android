@@ -27,4 +27,5 @@ sealed interface WritePostIntent {
     data object OnBackPressed : WritePostIntent
     data object OnWritePost : WritePostIntent
     data object SelectImages : WritePostIntent
+    data class ImageDelete(val index: Int) : WritePostIntent
 }

@@ -3,9 +3,7 @@ package com.choius323.mapleblock.ui.screen.writepost
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,8 +31,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
-import coil3.compose.AsyncImage
 import com.choius323.mapleblock.ui.component.HandlePermissionActions
 import com.choius323.mapleblock.ui.component.MBButton
 import com.choius323.mapleblock.ui.component.MBChip
@@ -44,10 +39,8 @@ import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.MBTextFieldSection
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.component.getImagePicker
-import com.choius323.mapleblock.ui.icon.AddPicture
 import com.choius323.mapleblock.ui.icon.Back
 import com.choius323.mapleblock.ui.icon.MBIcons
-import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
 import com.choius323.mapleblock.ui.theme.MBTypo
 import com.choius323.mapleblock.util.readImagePermissions
@@ -213,64 +206,6 @@ fun CategorySection(
                     isSelected = selectedCategoryIndex == index,
                     onClick = { onCategoryClick(index) }
                 )
-            }
-        }
-    }
-}
-
-@Composable
-private fun ImageAttachmentRow(
-    imageStrList: List<String>,
-    modifier: Modifier = Modifier,
-    onEvent: (WritePostIntent) -> Unit,
-) {
-    val outlineColor = MaterialTheme.colorScheme.outline
-    val imageModifier = remember {
-        Modifier
-            .size(64.dp)
-            .border(1.dp, outlineColor)
-    }
-    val scrollState = rememberScrollState()
-    val imageUriList by remember(imageStrList) {
-        derivedStateOf {
-            imageStrList.map(String::toUri)
-        }
-    }
-    Column(
-        modifier.padding(vertical = 16.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            MBText("사진첨부", style = MBTypo.Subtitle2)
-            MBText(
-                "${imageStrList.size}/${WritePostUiState.MAX_IMAGE_COUNT}",
-                color = MBColor.Gray400,
-                style = MBTypo.Caption,
-            )
-        }
-        Spacer(Modifier.height(8.dp))
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.horizontalScroll(scrollState)
-        ) {
-            repeat(WritePostUiState.MAX_IMAGE_COUNT) {
-                val uri = imageUriList.getOrNull(it)
-                if (uri == null) {
-                    Icon(
-                        MBIcons.Pixel.AddPicture,
-                        "사진 첨부 버튼",
-                        modifier = imageModifier
-                            .clickable { onEvent(WritePostIntent.SelectImages) }
-                    )
-                } else {
-                    AsyncImage(
-                        model = uri,
-                        contentDescription = null,
-                        modifier = imageModifier
-                    )
-                }
             }
         }
     }
