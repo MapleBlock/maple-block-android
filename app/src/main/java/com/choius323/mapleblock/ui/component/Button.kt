@@ -66,6 +66,7 @@ fun MBButton(
                     )
                 }
             },
+        contentPadding = PaddingValues(14.dp),
         enabled = enabled,
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(
@@ -161,7 +162,6 @@ fun MapleButtonPreview() {
                         MBText(text = "기본 버튼", style = MBTypo.Subtitle2)
                         Icon(MBIcons.Pixel.ArrowDropDown, contentDescription = null)
                     },
-                    modifier = Modifier,
                     onClick = {}
                 )
                 MBButton(
@@ -170,14 +170,12 @@ fun MapleButtonPreview() {
                         MBText(text = "비활성화 버튼", style = MBTypo.Subtitle2)
                         Icon(MBIcons.Pixel.ArrowDropDown, contentDescription = null)
                     },
-                    modifier = Modifier,
-                    onClick = {},
-                    enabled = false
+                    onClick = {}, enabled = false
                 )
-                MBPrimaryButton(text = "기본 버튼", onClick = { /* TODO */ })
-                MBPrimaryButton(text = "비활성화 버튼", onClick = { /* TODO */ }, enabled = false)
-                MBSecondaryButton(text = "보조 버튼", onClick = { /* TODO */ })
-                MBSecondaryButton(text = "보조 비활성화 버튼", onClick = { /* TODO */ }, enabled = false)
+                MBPrimaryButton(text = "기본 버튼", onClick = { })
+                MBPrimaryButton(text = "비활성화 버튼", onClick = { }, enabled = false)
+                MBSecondaryButton(text = "보조 버튼", onClick = { })
+                MBSecondaryButton(text = "보조 비활성화 버튼", onClick = { }, enabled = false)
             }
         }
     }
