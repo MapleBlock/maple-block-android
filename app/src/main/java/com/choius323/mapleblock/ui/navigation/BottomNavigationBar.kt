@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -29,6 +28,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.svg.SvgDecoder
+import com.choius323.mapleblock.ui.component.MBHorizonDivider
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTypo
@@ -51,13 +51,13 @@ fun BottomNavigationBar(
         modifier
             .fillMaxWidth()
             .height(104.dp)
-            .padding(vertical = 12.dp, horizontal = 24.dp),
+            .padding(vertical = 12.dp),
     ) {
-        HorizontalDivider(thickness = 2.dp, color = MBColor.Gray200)
+        MBHorizonDivider()
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             NavItem.BottomNavItem.list.forEach { item ->
                 val isSelected = remember(backStackEntry?.destination) {
@@ -75,7 +75,8 @@ fun BottomNavigationBar(
                         .fillMaxHeight()
                         .clickable { navController.navigateToBottomBarRoute(item) }
                         .background(backgroundColor),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
                 ) {
                     AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current).data(item.iconRes)
