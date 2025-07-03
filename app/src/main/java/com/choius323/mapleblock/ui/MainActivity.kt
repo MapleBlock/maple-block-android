@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
@@ -56,7 +55,6 @@ fun MainApp() {
             )
         },
         modifier = Modifier
-            .navigationBarsPadding()
             .background(MaterialTheme.colorScheme.background)
     ) { innerPadding ->
         MainNavController(
