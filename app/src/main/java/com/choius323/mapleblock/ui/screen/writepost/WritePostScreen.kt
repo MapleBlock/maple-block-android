@@ -34,11 +34,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import coil3.compose.AsyncImage
 import com.choius323.mapleblock.ui.component.HandlePermissionActions
@@ -46,7 +44,7 @@ import com.choius323.mapleblock.ui.component.MBButton
 import com.choius323.mapleblock.ui.component.MBChip
 import com.choius323.mapleblock.ui.component.MBHorizonDivider
 import com.choius323.mapleblock.ui.component.MBText
-import com.choius323.mapleblock.ui.component.MBTextField
+import com.choius323.mapleblock.ui.component.MBTextFieldSection
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.component.getImagePicker
 import com.choius323.mapleblock.ui.theme.MBColor
@@ -147,24 +145,26 @@ private fun WritePostScreenContent(
             onCategoryClick = { }
         )
         MBHorizonDivider()
-        InputSection(
-            text = uiState.title,
-            onTextChange = { onEvent(WritePostIntent.OnTitleChange(it)) },
-            showInformation = true,
-            modifier = Modifier.fillMaxWidth(),
+        MBTextFieldSection(
             sectionType = "제목",
+            inputText = uiState.title,
+            onTextChange = { onEvent(WritePostIntent.OnTitleChange(it)) },
+            modifier = Modifier.fillMaxSize(),
+            isEssential = true,
+            information = "30자 이내로 입력해주세요."
         )
         MBHorizonDivider()
-        InputSection(
-            text = uiState.content,
+        MBTextFieldSection(
+            sectionType = "본문",
+            inputText = uiState.content,
             onTextChange = { onEvent(WritePostIntent.OnContentChange(it)) },
-            showInformation = false,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
+            isEssential = true,
+            singleLine = false,
+            information = "30자 이내로 입력해주세요.",
             textFieldModifier = Modifier
                 .fillMaxWidth()
-                .heightIn(290.dp),
-            sectionType = "본문",
-            singleLine = false
+                .heightIn(290.dp)
         )
         MBHorizonDivider()
         ImageAttachmentRow(
@@ -215,44 +215,6 @@ fun CategorySection(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun InputSection(
-    text: String,
-    showInformation: Boolean,
-    sectionType: String,
-    modifier: Modifier = Modifier,
-    textFieldModifier: Modifier = Modifier,
-    singleLine: Boolean = true,
-    onTextChange: (String) -> Unit,
-) {
-    Column(modifier.padding(vertical = 16.dp)) {
-        Row(
-            Modifier.fillMaxWidth()
-        ) {
-            MBText(text = sectionType)
-            Box(
-                Modifier
-                    .padding(top = 3.dp, start = 2.67.dp)
-                    .size(4.dp)
-                    .rotate(45f)
-                    .background(MaterialTheme.colorScheme.error)
-            )
-            if (showInformation) {
-                Spacer(Modifier.weight(1f))
-                MBText(text = "30자 이내로 입력해주세요.", color = Color.Gray, fontSize = 12.sp)
-            }
-        }
-        Spacer(Modifier.height(8.dp))
-        MBTextField(
-            value = text,
-            onValueChange = { onTextChange(it) },
-            hint = "${sectionType}을 입력해주세요.",
-            singleLine = singleLine,
-            modifier = textFieldModifier
-        )
     }
 }
 
