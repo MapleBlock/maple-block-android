@@ -123,11 +123,13 @@ fun MBTextFieldSection(
             isError = isError,
         )
         Spacer(Modifier.height(8.dp))
-        MBText(
-            text = errorMessage,
-            color = MaterialTheme.colorScheme.error,
-            style = MBTypo.Body1,
-        )
+        if (isError) {
+            MBText(
+                text = errorMessage,
+                color = MaterialTheme.colorScheme.error,
+                style = MBTypo.Body1,
+            )
+        }
     }
 }
 
@@ -171,7 +173,7 @@ fun MBTextFieldSectionPreview() {
                 MBHorizonDivider()
                 MBTextFieldSection(
                     sectionType = "본문",
-                    inputText = "입력된 내용입니다. ".repeat(15),
+                    inputText = "입력된 내용입니다. ".repeat(10),
                     isEssential = true,
                     modifier = Modifier.padding(16.dp),
                     information = "83/1035",
@@ -181,7 +183,7 @@ fun MBTextFieldSectionPreview() {
                 MBHorizonDivider()
                 MBTextFieldSection(
                     sectionType = "본문",
-                    inputText = "입력된 내용입니다. ".repeat(15),
+                    inputText = "입력된 내용입니다. ".repeat(10),
                     isEssential = true,
                     modifier = Modifier.padding(16.dp),
                     information = "83/1035",
