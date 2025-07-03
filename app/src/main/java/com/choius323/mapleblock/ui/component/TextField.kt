@@ -16,6 +16,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -23,7 +26,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
 import com.choius323.mapleblock.ui.theme.MBTypo
@@ -36,27 +38,32 @@ fun MBTextField(
     hint: String = "",
     singleLine: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    isError: Boolean = false,
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+    val color by remember(isError, colorScheme) {
+        derivedStateOf { if (isError) colorScheme.error else colorScheme.onSurface }
+    }
     BasicTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier
             .border(
                 width = 2.dp,
-                color = MaterialTheme.colorScheme.outline,
+                color = color,
                 shape = RectangleShape,
             )
             .padding(16.dp)
             .fillMaxWidth()
             .height(IntrinsicSize.Max),
-        textStyle = MBTypo.Body2,
+        textStyle = MBTypo.Body2.copy(color = color),
         singleLine = singleLine,
         keyboardOptions = keyboardOptions,
         decorationBox = { innerTextField ->
             if (value.isEmpty()) {
                 MBText(
                     text = hint,
-                    color = Gray30,
+                    color = MBColor.Gray400,
                     style = MBTypo.Body2,
                     modifier = Modifier.height(IntrinsicSize.Max)
                 )
@@ -70,14 +77,17 @@ fun MBTextField(
 fun MBTextFieldSection(
     sectionType: String,
     inputText: String,
-    hint: String = "${sectionType}을 입력해주세요.",
     modifier: Modifier = Modifier,
+    hint: String = "${sectionType}을 입력해주세요.",
     isEssential: Boolean = false,
     information: String = "",
     singleLine: Boolean = false,
     textFieldModifier: Modifier = Modifier,
+    isError: Boolean = false,
+    errorMessage: String = "",
     onTextChange: (String) -> Unit,
 ) {
+    val colorScheme = MaterialTheme.colorScheme
     Column(modifier.padding(vertical = 16.dp)) {
         Row(
             Modifier.fillMaxWidth(),
@@ -109,7 +119,14 @@ fun MBTextFieldSection(
             onValueChange = { onTextChange(it) },
             hint = hint,
             singleLine = singleLine,
-            modifier = textFieldModifier
+            modifier = textFieldModifier,
+            isError = isError,
+        )
+        Spacer(Modifier.height(8.dp))
+        MBText(
+            text = errorMessage,
+            color = MaterialTheme.colorScheme.error,
+            style = MBTypo.Body1,
         )
     }
 }
@@ -160,6 +177,18 @@ fun MBTextFieldSectionPreview() {
                     information = "83/1035",
                     singleLine = false,
                     onTextChange = {}
+                )
+                MBHorizonDivider()
+                MBTextFieldSection(
+                    sectionType = "본문",
+                    inputText = "입력된 내용입니다. ".repeat(15),
+                    isEssential = true,
+                    modifier = Modifier.padding(16.dp),
+                    information = "83/1035",
+                    singleLine = false,
+                    onTextChange = {},
+                    isError = true,
+                    errorMessage = "오류 메시지입니다."
                 )
             }
         }
