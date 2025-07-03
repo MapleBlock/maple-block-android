@@ -93,9 +93,10 @@ private fun ImageSection(
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
-        Box(
+        // 프로필 정보
+        Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
@@ -103,10 +104,6 @@ private fun ImageSection(
                         endY = Float.POSITIVE_INFINITY,
                     )
                 )
-        )
-        // 프로필 정보
-        Row(
-            modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
