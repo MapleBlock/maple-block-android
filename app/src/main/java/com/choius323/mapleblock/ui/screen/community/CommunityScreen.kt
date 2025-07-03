@@ -104,7 +104,7 @@ fun CommunityScreenContent(
             MBIcons.Pixel.Add,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .offset(x = (-16).dp, y = (-24).dp)
+                .offset(y = (-24).dp)
                 .size(72.dp)
                 .background(MaterialTheme.colorScheme.background)
                 .clickable { onEvent(CommunityListUiEvent.WriteCommunityArticle) }
