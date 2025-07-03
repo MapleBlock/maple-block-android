@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.component.MBChip
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
@@ -116,7 +115,7 @@ private fun NoticeListItem(
             Modifier
                 .background(MBColor.Discord)
                 .padding(horizontal = 8.dp, vertical = 4.dp),
-            fontSize = 12.sp
+            style = MBTypo.Caption
         )
         MBText(notice.title, style = MBTypo.Subtitle2)
         MBText("2025. 05. 05", color = MBColor.Gray300, style = MBTypo.Body3)

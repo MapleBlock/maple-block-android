@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -20,11 +21,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.icon.Forward
 import com.choius323.mapleblock.ui.icon.MBIcons
-import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 
 @Composable
 fun MBText(
@@ -76,7 +76,7 @@ fun TextRowBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MBText(text = text, fontSize = 16.sp, color = Gray30)
+        MBText(text = text, style = MBTypo.Body2)
         Icon(MBIcons.Pixel.Forward, "Arrow Forward")
     }
 }
@@ -85,6 +85,8 @@ fun TextRowBar(
 @Composable
 private fun TextRowBarPreview() {
     MBTheme {
-        TextRowBar("차단게시물 / 유저관리", Modifier.width(400.dp))
+        Surface {
+            TextRowBar("차단게시물 / 유저관리", Modifier.width(400.dp))
+        }
     }
 }

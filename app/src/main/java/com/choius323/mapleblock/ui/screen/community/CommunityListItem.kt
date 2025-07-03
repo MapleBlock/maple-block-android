@@ -18,7 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -30,18 +29,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.model.CommunityListItem
-import com.choius323.mapleblock.ui.theme.Gray30
+import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.text.NumberFormat
@@ -126,9 +124,8 @@ private fun ImageSection(
             )
             MBText(
                 text = profileName,
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold
+                color = MBColor.Gray100,
+                style = MBTypo.Caption,
             )
         }
     }
@@ -147,18 +144,17 @@ private fun ContentSection(
         modifier = Modifier,
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        MBText(text = articleType, color = Gray30, fontSize = 12.sp)
+        MBText(text = articleType, color = MBColor.Gray300, style = MBTypo.Body2)
         MBText(
             text = title,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            maxLines = 1,
+            style = MBTypo.Subtitle2,
+            maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
         MBText(
             text = content,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+            style = MBTypo.Body2,
+            color = MBColor.Gray400,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
@@ -167,7 +163,7 @@ private fun ContentSection(
         // 날짜, 댓글, 좋아요 정보
         Row(verticalAlignment = Alignment.CenterVertically) {
             val formatter = remember { DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm") }
-            MBText(text = date.format(formatter), color = Gray30, fontSize = 12.sp)
+            MBText(text = date.format(formatter), color = MBColor.Gray300, style = MBTypo.Caption)
             Spacer(Modifier.weight(1f))
             IconCount(icon = Icons.Outlined.ChatBubbleOutline, count = commentsCount)
             Spacer(Modifier.width(12.dp))
@@ -188,12 +184,12 @@ private fun IconCount(icon: ImageVector, count: Int, modifier: Modifier = Modifi
             imageVector = icon,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
-            tint = Gray30
+            tint = MBColor.Gray300
         )
         MBText(
             text = numberFormatter.format(count),
-            color = Gray30,
-            fontSize = 12.sp
+            color = MBColor.Gray300,
+            style = MBTypo.Caption
         )
     }
 }

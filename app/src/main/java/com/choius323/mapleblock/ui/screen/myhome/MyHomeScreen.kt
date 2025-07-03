@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
@@ -26,14 +25,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.R
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
 import com.choius323.mapleblock.ui.icon.Forward
 import com.choius323.mapleblock.ui.icon.MBIcons
-import com.choius323.mapleblock.ui.theme.ErrorRed
-import com.choius323.mapleblock.ui.theme.Gray30
 import com.choius323.mapleblock.ui.theme.Gray90
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
@@ -73,6 +69,19 @@ fun MyHomeScreenContent(
         )
         Spacer(Modifier.height(8.dp))
         MenuItems()
+        Spacer(Modifier.weight(1f))
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(vertical = 13.dp, horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            MBText(text = "로그아웃", style = MBTypo.Body1, color = MaterialTheme.colorScheme.error)
+            Spacer(modifier = Modifier.weight(1f))
+            MBText(
+                text = "계정탈퇴", color = MaterialTheme.colorScheme.error, style = MBTypo.Body1,
+            )
+        }
     }
 }
 
@@ -112,17 +121,11 @@ fun MenuItems(modifier: Modifier = Modifier) {
     ) {
         MenuItem(text = "차단게시물/유저관리")
         MenuDivider()
-        MenuItem(text = "모드 변경", value = "현재 : 화이트")
+        MenuItem(text = "모드 변경")
         MenuDivider()
         MenuItem(text = "개인정보처리방침/이용약관")
         MenuDivider()
-        MenuItem(
-            text = "로그아웃/계정탈퇴",
-            textColor = ErrorRed,
-            iconColor = ErrorRed
-        )
-        MenuDivider()
-        MenuItem(text = "앱 버전", value = "v1.0.0", showArrow = false)
+        MenuItem(text = "앱 버전")
     }
 }
 
@@ -139,10 +142,8 @@ fun MenuDivider(modifier: Modifier = Modifier) {
 fun MenuItem(
     text: String,
     modifier: Modifier = Modifier,
-    value: String? = null,
     textColor: Color = Color.Unspecified,
     iconColor: Color = MaterialTheme.colorScheme.onSurface,
-    showArrow: Boolean = true,
 ) {
     Row(
         modifier = modifier
@@ -153,18 +154,12 @@ fun MenuItem(
     ) {
         MBText(text = text, style = MBTypo.Body1, color = textColor)
         Spacer(modifier = Modifier.weight(1f))
-        if (value != null) {
-            MBText(text = value, fontSize = 16.sp, color = Gray30)
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-        if (showArrow) {
-            Icon(
-                imageVector = MBIcons.Pixel.Forward,
-                contentDescription = text,
-                tint = iconColor,
-                modifier = Modifier.size(18.dp)
-            )
-        }
+        Icon(
+            imageVector = MBIcons.Pixel.Forward,
+            contentDescription = text,
+            tint = iconColor,
+            modifier = Modifier.size(18.dp)
+        )
     }
 }
 

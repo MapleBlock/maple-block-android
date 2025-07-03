@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.choius323.mapleblock.ui.component.MBChip
 import com.choius323.mapleblock.ui.component.MBText
 import com.choius323.mapleblock.ui.component.ProvideAppBar
@@ -36,6 +35,7 @@ import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.icon.Search
 import com.choius323.mapleblock.ui.model.CommunityListItem
 import com.choius323.mapleblock.ui.theme.MBTheme
+import com.choius323.mapleblock.ui.theme.MBTypo
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -50,7 +50,7 @@ fun CommunityScreen(
     val state by viewModel.collectAsState()
     ProvideAppBar(
         showAppBar = true,
-        navigationIcon = { MBText("커뮤니티", fontSize = 28.sp) },
+        navigationIcon = { MBText("커뮤니티", style = MBTypo.Title2) },
         actions = { Icon(MBIcons.Pixel.Search, contentDescription = "Search") }
     )
     viewModel.collectSideEffect { sideEffect ->

@@ -90,23 +90,23 @@ fun MBPrimaryButton(
     Button(
         onClick = onClick,
         modifier = modifier
-            .heightIn(min = 48.dp), // 최소 높이를 위한 임의 설정 (패딩 12px * 2 + 폰트 16px = 40px, 여기에 여유 줌)
+            .heightIn(min = 48.dp),
         enabled = enabled,
-        shape = MaterialTheme.shapes.small, // border-radius: 6px [cite: 11] -> MaterialTheme.shapes.small (6.dp)
+        shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary, // background-color: #007AFF [cite: 11]
-            contentColor = MaterialTheme.colorScheme.onPrimary, // color: #FFFFFF [cite: 11]
-            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f), // Disabled: opacity 50% [cite: 13]
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
             disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
         ),
         contentPadding = PaddingValues(
             horizontal = 24.dp,
             vertical = 12.dp
-        ) // padding: 12px 24px [cite: 11]
+        )
     ) {
         MBText(
             text = text,
-            style = MaterialTheme.typography.labelLarge // font-size: 16px, font-weight: 600 [cite: 11]
+            style = MBTypo.Subtitle2
         )
     }
 }
@@ -118,31 +118,30 @@ fun MBSecondaryButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
 ) {
-    OutlinedButton( // OutlinedButton을 사용하여 테두리 스타일 적용
+    OutlinedButton(
         onClick = onClick,
         modifier = modifier
-            .heightIn(min = 48.dp), // 최소 높이를 위한 임의 설정
+            .heightIn(min = 48.dp),
         enabled = enabled,
-        shape = MaterialTheme.shapes.small, // border-radius: 6px [cite: 12] -> MaterialTheme.shapes.small (6.dp)
+        shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.outlinedButtonColors(
-            containerColor = Gray90, // background-color: #F5F5F7 [cite: 12]
-            contentColor = MaterialTheme.colorScheme.primary, // color: #007AFF [cite: 12]
-            disabledContainerColor = Gray90.copy(alpha = 0.5f), // Disabled: opacity 50% [cite: 13]
+            containerColor = Gray90,
+            contentColor = MaterialTheme.colorScheme.primary,
+            disabledContainerColor = Gray90.copy(alpha = 0.5f),
             disabledContentColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
         ),
         border = ButtonDefaults.outlinedButtonBorder(true).copy(
-            // border: 1px solid #007AFF [cite: 12]
             brush = SolidColor(MaterialTheme.colorScheme.primary),
             width = 1.dp,
         ),
         contentPadding = PaddingValues(
             horizontal = 24.dp,
             vertical = 12.dp
-        ) // padding: 12px 24px [cite: 12]
+        )
     ) {
         MBText(
             text = text,
-            style = MaterialTheme.typography.labelLarge // font-size: 16px, font-weight: 600 [cite: 12]
+            style = MBTypo.Subtitle2,
         )
     }
 }
