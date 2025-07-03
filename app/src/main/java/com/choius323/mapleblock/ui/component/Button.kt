@@ -7,9 +7,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDownward
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -24,6 +21,9 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.choius323.mapleblock.ui.icon.ArrowDropDown
+import com.choius323.mapleblock.ui.icon.Home
+import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.theme.Gray90
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBTheme
@@ -147,8 +147,6 @@ fun MBSecondaryButton(
     }
 }
 
-
-// 프리뷰
 @Preview(showBackground = true)
 @Composable
 fun MapleButtonPreview() {
@@ -160,18 +158,18 @@ fun MapleButtonPreview() {
             ) {
                 MBButton(
                     content = {
-                        Icon(Icons.Default.Home, contentDescription = null)
+                        Icon(MBIcons.Pixel.Home, contentDescription = null)
                         MBText(text = "기본 버튼", style = MBTypo.Subtitle2)
-                        Icon(Icons.Default.ArrowDownward, contentDescription = null)
+                        Icon(MBIcons.Pixel.ArrowDropDown, contentDescription = null)
                     },
                     modifier = Modifier,
                     onClick = {}
                 )
                 MBButton(
                     content = {
-                        Icon(Icons.Default.Home, contentDescription = null)
+                        Icon(MBIcons.Pixel.Home, contentDescription = null)
                         MBText(text = "비활성화 버튼", style = MBTypo.Subtitle2)
-                        Icon(Icons.Default.ArrowDownward, contentDescription = null)
+                        Icon(MBIcons.Pixel.ArrowDropDown, contentDescription = null)
                     },
                     modifier = Modifier,
                     onClick = {},
