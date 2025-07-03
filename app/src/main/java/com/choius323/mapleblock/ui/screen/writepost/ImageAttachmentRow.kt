@@ -84,7 +84,9 @@ private fun ImageEmpty(
         modifier
             .size(64.dp)
             .border(1.dp, MaterialTheme.colorScheme.outline)
-            .clickable { onEvent(WritePostIntent.SelectImages) }) {
+            .clickable { onEvent(WritePostIntent.SelectImages) },
+        contentAlignment = Alignment.Center
+    ) {
         Icon(
             MBIcons.Pixel.AddPicture,
             "사진 첨부 버튼",
