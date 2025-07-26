@@ -18,6 +18,7 @@ import androidx.navigation.toRoute
 import com.choius323.mapleblock.ui.screen.community.CommunityScreen
 import com.choius323.mapleblock.ui.screen.communityarticle.CommunityArticleScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
+import com.choius323.mapleblock.ui.screen.imagepage.ImagePageScreen
 import com.choius323.mapleblock.ui.screen.myhome.MyHomeScreen
 import com.choius323.mapleblock.ui.screen.myhome.ProfileScreen
 import com.choius323.mapleblock.ui.screen.notice.NoticeListScreen
@@ -117,7 +118,16 @@ fun MainNavController(
         composable<NavItem.CommunityArticle> { backStackEntry ->
             CommunityArticleScreen(
                 modifier = Modifier.fillMaxSize(),
-                goBack = { navController.upPress() }
+                viewImagePage = { index, list ->
+                    navController.navigate(NavItem.ImagePage(index, list))
+                },
+                goBack = navController::upPress
+            )
+        }
+        composable<NavItem.ImagePage> { backStackEntry ->
+            ImagePageScreen(
+                modifier = Modifier.fillMaxSize(),
+                goBack = navController::upPress
             )
         }
     }

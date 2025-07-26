@@ -24,6 +24,13 @@ class CommunityArticleViewModel(
         is CommunityArticleUiEvent.OnSubmitComment -> onSubmitComment()
         is CommunityArticleUiEvent.OnLikeComment -> onLikeComment(event.commentId)
         is CommunityArticleUiEvent.OnReportArticle -> onReportArticle()
+        is CommunityArticleUiEvent.OnClickImage -> intent {
+            val list = state.article?.images
+            if (list.isNullOrEmpty().not()) {
+                postSideEffect(CommunityArticleSideEffect.ViewImagePage(event.index, list))
+            }
+        }
+
         is CommunityArticleUiEvent.OnEditArticle -> intent {
             // TODO: 게시글 수정 로직 추가
         }

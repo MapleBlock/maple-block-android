@@ -70,4 +70,7 @@ sealed interface NavItem {
 
     @Serializable
     data class CommunityArticle(val articleId: Long) : NavItem
+
+    @Serializable
+    data class ImagePage(val index: Int, val imageList: List<String>) : NavItem
 }

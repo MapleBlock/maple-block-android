@@ -19,9 +19,11 @@ sealed interface CommunityArticleUiEvent {
     data class OnLikeComment(val commentId: Long) : CommunityArticleUiEvent
     data object OnEditArticle : CommunityArticleUiEvent
     data object OnReportArticle : CommunityArticleUiEvent
+    data class OnClickImage(val index: Int) : CommunityArticleUiEvent
 }
 
 sealed interface CommunityArticleSideEffect {
     data class ShowToast(val message: String) : CommunityArticleSideEffect
-    // data object NavigateToDetailScreen : CommunityArticleSideEffect
+    data class ViewImagePage(val index: Int, val imageList: List<String>) :
+        CommunityArticleSideEffect
 }

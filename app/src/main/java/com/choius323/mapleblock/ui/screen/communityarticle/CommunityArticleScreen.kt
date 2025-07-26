@@ -58,6 +58,7 @@ import org.orbitmvi.orbit.compose.collectSideEffect
 @Composable
 fun CommunityArticleScreen(
     modifier: Modifier = Modifier,
+    viewImagePage: (Int, List<String>) -> Unit,
     viewModel: CommunityArticleViewModel = koinViewModel(),
     goBack: () -> Unit,
 ) {
@@ -68,6 +69,10 @@ fun CommunityArticleScreen(
         when (sideEffect) {
             is CommunityArticleSideEffect.ShowToast -> {
                 Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
+            }
+
+            is CommunityArticleSideEffect.ViewImagePage -> {
+                viewImagePage(sideEffect.index, sideEffect.imageList)
             }
         }
     }
@@ -133,7 +138,7 @@ fun CommunityArticleContent(
                             article = uiState.article,
                             modifier = Modifier.padding(horizontal = 16.dp)
                         )
-                        PostBody(article = uiState.article)
+                        PostBody(article = uiState.article, onEvent = onEvent)
                     }
                     MBHorizonDivider(thickness = 8.dp, color = Gray200)
                 }
@@ -181,8 +186,9 @@ private fun ArticleAuthorProfile(
 
 @Composable
 private fun PostBody(
-    modifier: Modifier = Modifier,
     article: CommunityArticle,
+    modifier: Modifier = Modifier,
+    onEvent: (CommunityArticleUiEvent) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -197,9 +203,13 @@ private fun PostBody(
         if (article.images.isNotEmpty()) {
             Spacer(modifier = Modifier.height(16.dp))
             ImageSection(
-                imageUrlList = article.images, modifier = Modifier
+                imageUrlList = article.images,
+                modifier = Modifier
                     .fillMaxWidth()
-                    .height(170.dp)
+                    .height(170.dp),
+                onClickImage = {
+                    onEvent(CommunityArticleUiEvent.OnClickImage(it))
+                }
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -214,6 +224,7 @@ private fun PostBody(
 private fun ImageSection(
     imageUrlList: List<String>,
     modifier: Modifier = Modifier,
+    onClickImage: (Int) -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = { imageUrlList.size })
 
@@ -223,7 +234,8 @@ private fun ImageSection(
                 model = imageUrlList[page],
                 contentDescription = "Post Image",
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .clickable(onClick = { onClickImage(page) }),
                 error = painterResource(R.drawable.img_checker),
                 contentScale = ContentScale.FillWidth
             )
