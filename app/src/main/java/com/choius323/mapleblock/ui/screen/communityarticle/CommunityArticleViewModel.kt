@@ -30,24 +30,15 @@ class CommunityArticleViewModel(
     }
 
     private fun loadArticle() = intent {
-        state.copy(
-            article = CommunityArticle( // CommunityArticle 모델 사용
-                id = 1,
-                title = "오늘 큐브 돌리다가...",
-                content = "레전드리 등급 가서 너무 기분 좋네요 ㅎㅎㅎ 다들 득템하세요!",
-                author = "메이플고인물",
-                viewCount = 123,
-                commentCount = 3,
-                likeCount = 10,
-                timestamp = "2024.07.25",
-                images = listOf(
-                    "https://apis.map.kakao.com/android_v2/decal.gif",
-                    "https://apis.map.kakao.com/android_v2/labelstyle_desc.png"
-                )
-            ), comments = listOf(
-                ArticleComment.sample2, ArticleComment.sample3, ArticleComment.sample4
-            ), isLoading = false
-        )
+        reduce {
+            state.copy(
+                article = CommunityArticle.sample1,
+                comments = listOf(
+                    ArticleComment.sample2, ArticleComment.sample3, ArticleComment.sample4
+                ),
+                isLoading = false
+            )
+        }
     }
 
     fun onCommentChange(comment: String) = intent {

@@ -1,6 +1,8 @@
 package com.choius323.mapleblock.ui.screen.communityarticle
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -69,27 +70,36 @@ fun CommunityArticleScreen(
 
     ProvideAppBar(
         navigationIcon = {
-            IconButton(onClick = goBack) {
-                Icon(imageVector = MBIcons.Pixel.Back, contentDescription = "뒤로가기")
-            }
+            Icon(
+                imageVector = MBIcons.Pixel.Back,
+                contentDescription = "뒤로가기",
+                modifier = Modifier.clickable(onClick = goBack)
+            )
         },
         actions = {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                IconButton({ viewModel.onEvent(CommunityArticleUiEvent.OnEditArticle) }) {
-                    Icon(
-                        imageVector = MBIcons.Pixel.Edit,
-                        contentDescription = "수정하기",
-                    )
-                }
-                IconButton({ viewModel.onEvent(CommunityArticleUiEvent.OnBookmarkClick) }) {
-                    Icon(
-                        imageVector = MBIcons.Pixel.Bookmark,
-                        contentDescription = "북마크",
-                        tint = if (uiState.isBookmarked) MBColor.Primary500 else MBColor.Gray300
-                    )
-                }
+                Icon(
+                    imageVector = MBIcons.Pixel.Edit,
+                    contentDescription = "수정하기",
+                    modifier = Modifier.clickable(onClick = {
+                        viewModel.onEvent(
+                            CommunityArticleUiEvent.OnEditArticle
+                        )
+                    })
+                )
+                Icon(
+                    imageVector = MBIcons.Pixel.Bookmark,
+                    contentDescription = "북마크",
+                    tint = if (uiState.isBookmarked) MBColor.Primary500 else MBColor.Gray300,
+                    modifier = Modifier.clickable(onClick = {
+                        viewModel.onEvent(
+                            CommunityArticleUiEvent.OnBookmarkClick
+                        )
+                    })
+                )
             }
         }
     )
