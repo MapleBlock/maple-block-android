@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.choius323.mapleblock.ui.screen.community.CommunityScreen
+import com.choius323.mapleblock.ui.screen.communityarticle.CommunityArticleScreen
 import com.choius323.mapleblock.ui.screen.home.HomeScreen
 import com.choius323.mapleblock.ui.screen.myhome.MyHomeScreen
 import com.choius323.mapleblock.ui.screen.myhome.ProfileScreen
@@ -69,7 +70,12 @@ fun MainNavController(
             )
         }
         composable<NavItem.BottomNavItem.Community> { backStackEntry ->
-            CommunityScreen(Modifier.fillMaxSize()) {
+            CommunityScreen(
+                Modifier.fillMaxSize(),
+                goCommunityArticle = {
+                    navController.navigate(NavItem.CommunityArticle(it))
+                }
+            ) {
                 navController.navigate(NavItem.WritePost)
             }
         }
@@ -106,6 +112,12 @@ fun MainNavController(
                         }
                     }
                 }
+            )
+        }
+        composable<NavItem.CommunityArticle> { backStackEntry ->
+            CommunityArticleScreen(
+                modifier = Modifier.fillMaxSize(),
+                goBack = { navController.upPress() }
             )
         }
     }

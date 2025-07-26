@@ -10,8 +10,10 @@ data class CommunityListUiState(
 
 sealed interface CommunityListUiEvent {
     data object WriteCommunityArticle : CommunityListUiEvent
+    data class OnClickCommunityArticle(val articleId: Long) : CommunityListUiEvent
 }
 
 sealed interface CommunityListSideEffect {
     data object GoWriteCommunityArticle : CommunityListSideEffect
+    data class GoCommunityArticle(val articleId: Long) : CommunityListSideEffect
 }

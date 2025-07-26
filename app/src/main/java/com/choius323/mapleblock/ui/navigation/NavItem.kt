@@ -67,4 +67,7 @@ sealed interface NavItem {
 
     @Serializable
     data object Onboarding : NavItem
+
+    @Serializable
+    data class CommunityArticle(val articleId: Long) : NavItem
 }

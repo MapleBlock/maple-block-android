@@ -39,12 +39,12 @@ import com.choius323.mapleblock.ui.theme.MBTypo
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
-import org.threeten.bp.LocalDateTime
 
 @Composable
 fun CommunityScreen(
     modifier: Modifier = Modifier,
     viewModel: CommunityListViewModel = koinViewModel(),
+    goCommunityArticle: (articleId: Long) -> Unit,
     goWritePost: () -> Unit,
 ) {
     val state by viewModel.collectAsState()
@@ -56,6 +56,7 @@ fun CommunityScreen(
     viewModel.collectSideEffect { sideEffect ->
         when (sideEffect) {
             is CommunityListSideEffect.GoWriteCommunityArticle -> goWritePost()
+            is CommunityListSideEffect.GoCommunityArticle -> goCommunityArticle(sideEffect.articleId)
         }
     }
 
@@ -88,7 +89,9 @@ fun CommunityScreenContent(
             LazyColumn(Modifier.fillMaxWidth()) {
                 itemsIndexed(uiState.communityList) { index, communityListItem ->
                     CommunityListItem(
-                        modifier = Modifier.clickable {},
+                        modifier = Modifier.clickable {
+                            onEvent(CommunityListUiEvent.OnClickCommunityArticle(communityListItem.articleId))
+                        },
                         data = communityListItem,
                     )
                     if (index < uiState.communityList.lastIndex) {
@@ -140,17 +143,7 @@ fun CategoryChipRow(
 @Preview
 @Composable
 private fun CommunityScreenContentPreview() {
-    val sampleData = CommunityListItem(
-        articleType = "자유",
-        title = "렙 250 찍었는데 사람들이랑 파티는 언제쯤 가능함요?",
-        content = "스토리밀고 계속 보스 혼자서 잡는데 남들이랑 파티해서 보스 잡는건 언제쯤 하나요 팔라딘 키우는디 팔라딘 시너지 좋아서 데려간다...",
-        date = LocalDateTime.of(2025, 6, 24, 14, 5),
-        commentsCount = 1234,
-        likesCount = 1234,
-        imageUrl = "",
-        profileName = "메이플지박령",
-        profileImageUrl = "",
-    )
+    val sampleData = CommunityListItem.sample1
     MBTheme {
         Surface {
             CommunityScreenContent(
