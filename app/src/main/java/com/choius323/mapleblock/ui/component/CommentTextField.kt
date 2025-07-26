@@ -18,13 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -32,7 +26,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -58,10 +51,7 @@ fun MBCommentTextField(
     onAddImage: () -> Unit = {},
     onRemoveImage: () -> Unit = {},
 ) {
-    var textFieldHeight by remember { mutableStateOf(0.dp) }
-    val density = LocalDensity.current
-    val edgeColor = MaterialTheme.colorScheme.surface
-    var lineBottom by remember { mutableIntStateOf(Int.MAX_VALUE) }
+    val edgeColor = MaterialTheme.colorScheme.background
 
     Row(
         modifier = modifier, verticalAlignment = Alignment.Top
@@ -99,14 +89,13 @@ fun MBCommentTextField(
             Box(
                 Modifier
                     .weight(1f)
-                    .staticVerticalFadingEdge(edgeColor, textFieldHeight)
+                    .staticVerticalFadingEdge(edgeColor)
             ) {
                 BasicTextField(
                     value = value,
                     onValueChange = onValueChange,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(textFieldHeight)
                         .verticalScroll(rememberScrollState()),
                     textStyle = MBTypo.Body2,
                     singleLine = singleLine,
@@ -121,20 +110,7 @@ fun MBCommentTextField(
                         }
                         innerTextField()
                     },
-                    onTextLayout = { result ->
-                        val newLineBottom = minOf(result.lineCount, 2) - 1
-                        if (newLineBottom != lineBottom) {
-                            lineBottom = newLineBottom
-                            val newHeightInPx = result.getLineBottom(lineBottom)
-
-                            // 계산된 픽셀 높이를 Dp로 변환하여 상태 업데이트
-                            val newHeightInDp = with(density) { newHeightInPx.toDp() }
-
-                            if (textFieldHeight != newHeightInDp) {
-                                textFieldHeight = maxOf(newHeightInDp, textFieldHeight)
-                            }
-                        }
-                    }
+                    maxLines = 2,
                 )
             }
             Spacer(modifier = Modifier.width(24.dp))
@@ -163,7 +139,7 @@ fun MBCommentTextField(
  */
 private fun Modifier.staticVerticalFadingEdge(
     edgeColor: Color,
-    height: Dp?,
+    height: Dp? = null,
     @FloatRange(from = 0.0, 1.0) range: Float = 0.15f,
 ): Modifier = this
     .drawWithContent {
@@ -190,7 +166,6 @@ private fun MBCommentTextFieldPreview() {
     val longText = "두 줄 이상 넘어가는 긴 텍스트입니다.\n스크롤이 잘 되는지 확인해봅시다. \n두 번째 줄입니다."
 
     MBTheme {
-        Surface {
             Column(Modifier.padding(16.dp)) {
                 // 기본 상태
                 MBCommentTextField(value = "", onValueChange = {}, onSend = {})
@@ -209,7 +184,7 @@ private fun MBCommentTextFieldPreview() {
                     imageModel = null,
                     onRemoveImage = {}
                 )
+
             }
-        }
     }
 }
