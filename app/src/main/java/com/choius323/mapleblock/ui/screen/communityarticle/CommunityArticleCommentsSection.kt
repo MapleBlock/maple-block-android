@@ -34,7 +34,7 @@ import com.choius323.mapleblock.ui.theme.MBTheme
 import com.choius323.mapleblock.ui.theme.MBTypo.Body1
 import com.choius323.mapleblock.ui.theme.MBTypo.Body2
 import com.choius323.mapleblock.ui.theme.MBTypo.Caption
-import java.text.DecimalFormat
+import com.choius323.mapleblock.util.toNumString
 
 fun LazyListScope.communityArticleCommentsItems(
     commentList: List<ArticleComment>,
@@ -108,9 +108,10 @@ private fun LikeSection(
                 .clickable(onClick = onClickLike),
         )
         MBText(
-            DecimalFormat("#,###").format(count),
+            count.toNumString(),
             textAlign = TextAlign.Center,
             color = color,
+            style = Caption
         )
     }
 }

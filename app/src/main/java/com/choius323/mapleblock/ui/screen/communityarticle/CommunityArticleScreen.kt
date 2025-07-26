@@ -45,6 +45,7 @@ import com.choius323.mapleblock.ui.theme.MBTypo.Body1
 import com.choius323.mapleblock.ui.theme.MBTypo.Body2
 import com.choius323.mapleblock.ui.theme.MBTypo.Caption
 import com.choius323.mapleblock.ui.theme.MBTypo.Subtitle2
+import com.choius323.mapleblock.util.toNumString
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 import org.orbitmvi.orbit.compose.collectSideEffect
@@ -210,10 +211,10 @@ private fun CommentsAndLikesCountRow(
         modifier = modifier.fillMaxWidth()
     ) {
         Icon(MBIcons.Pixel.Comment, "댓글 수")
-        MBText(text = commentCount.toString(), style = Caption)
+        MBText(text = commentCount.toNumString(), style = Caption)
         Spacer(modifier = Modifier.width(16.dp))
         Icon(MBIcons.Pixel.Heart, "좋아요 수")
-        MBText(text = likeCount.toString(), style = Caption)
+        MBText(text = likeCount.toNumString(), style = Caption)
     }
 }
 
