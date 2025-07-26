@@ -134,8 +134,9 @@ fun OnboardingPageItem(item: OnboardingItem) {
 }
 
 @Composable
-fun PagerIndicator(pageCount: Int, currentPage: Int) {
+fun PagerIndicator(pageCount: Int, currentPage: Int, modifier: Modifier = Modifier) {
     Row(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

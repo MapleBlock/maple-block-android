@@ -3,6 +3,7 @@ package com.choius323.mapleblock.ui.screen.communityarticle
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -38,6 +41,7 @@ import com.choius323.mapleblock.ui.icon.Heart
 import com.choius323.mapleblock.ui.icon.MBIcons
 import com.choius323.mapleblock.ui.model.ArticleComment
 import com.choius323.mapleblock.ui.model.CommunityArticle
+import com.choius323.mapleblock.ui.screen.onboarding.PagerIndicator
 import com.choius323.mapleblock.ui.theme.MBColor
 import com.choius323.mapleblock.ui.theme.MBColor.Gray200
 import com.choius323.mapleblock.ui.theme.MBColor.Gray400
@@ -192,20 +196,44 @@ private fun PostBody(
         MBText(text = article.content, style = Body2)
         if (article.images.isNotEmpty()) {
             Spacer(modifier = Modifier.height(16.dp))
-            AsyncImage(
-                model = article.images.first(),
-                contentDescription = "Post Image",
-                modifier = Modifier
+            ImageSection(
+                imageUrlList = article.images, modifier = Modifier
                     .fillMaxWidth()
-                    .height(170.dp),
-                error = painterResource(R.drawable.img_checker),
-                contentScale = ContentScale.FillWidth
+                    .height(170.dp)
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
         CommentsAndLikesCountRow(
             article.commentCount,
             article.likeCount,
+        )
+    }
+}
+
+@Composable
+private fun ImageSection(
+    imageUrlList: List<String>,
+    modifier: Modifier = Modifier,
+) {
+    val pagerState = rememberPagerState(pageCount = { imageUrlList.size })
+
+    Box(modifier = modifier) {
+        HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize()) { page ->
+            AsyncImage(
+                model = imageUrlList[page],
+                contentDescription = "Post Image",
+                modifier = Modifier
+                    .fillMaxSize(),
+                error = painterResource(R.drawable.img_checker),
+                contentScale = ContentScale.FillWidth
+            )
+        }
+        PagerIndicator(
+            imageUrlList.size,
+            pagerState.currentPage,
+            modifier = Modifier
+                .padding(end = 14.dp, bottom = 14.dp)
+                .align(Alignment.BottomEnd)
         )
     }
 }
@@ -232,10 +260,15 @@ private fun CommentsAndLikesCountRow(
 @Composable
 private fun CommunityArticleContentPreview() {
     val post = CommunityArticle(
-        id = 1, title = "오늘 큐브 돌리다가...",
+        id = 1,
+        title = "오늘 큐브 돌리다가...",
         content = "레전드리 등급 가서 너무 기분 좋네요 ㅎㅎㅎ 다들 득템하세요!".repeat(5),
-        author = "메이플고인물", viewCount = 123, commentCount = 3, likeCount = 10,
-        timestamp = "2024.07.25", images = listOf("https://dummyimage.com/600x400/000/fff")
+        author = "메이플고인물",
+        viewCount = 123,
+        commentCount = 3,
+        likeCount = 10,
+        timestamp = "2024.07.25",
+        images = listOf("", "")
     )
     val comments = listOf(
         ArticleComment.sample1,
