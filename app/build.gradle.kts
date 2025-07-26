@@ -83,6 +83,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.ktor3)
     implementation(libs.coil.svg)
+    implementation("net.engawapg.lib:zoomable:2.8.1")
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)

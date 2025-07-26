@@ -3,6 +3,7 @@ package com.choius323.mapleblock.di
 import com.choius323.mapleblock.ui.screen.community.CommunityListViewModel
 import com.choius323.mapleblock.ui.screen.communityarticle.CommunityArticleViewModel
 import com.choius323.mapleblock.ui.screen.home.HomeViewModel
+import com.choius323.mapleblock.ui.screen.imagepage.ImagePageViewModel
 import com.choius323.mapleblock.ui.screen.notice.NoticeListViewModel
 import com.choius323.mapleblock.ui.screen.onboarding.OnboardingViewModel
 import com.choius323.mapleblock.ui.screen.writepost.WritePostViewModel
@@ -16,4 +17,5 @@ val uiModule = module {
     viewModelOf(::OnboardingViewModel)
     viewModelOf(::CommunityListViewModel)
     viewModelOf(::CommunityArticleViewModel)
+    viewModelOf(::ImagePageViewModel)
 }
